@@ -6,7 +6,8 @@
     <members>
         <member name="T:net.sf.robocode.io.LoggerN">
             <summary>
-              This is a class used for logging.
+                Класс для журналирования.
+              <!--This is a class used for logging.-->
             </summary>
              <exclude/>
         </member>
@@ -152,83 +153,103 @@
         </member>
         <member name="M:Robocode.RobotInterfaces.Peer.IBasicRobotPeer.GetName">
             <summary>
-            Returns the robot's name.
+                Возвращает имя робота.
+            <!--Returns the robot's name.-->
             </summary>
         </member>
         <member name="M:Robocode.RobotInterfaces.Peer.IBasicRobotPeer.GetTime">
             <summary>
-            Returns the game time of the current round, where the time is equal to
+                Возвращает текущее время раунда, где время равно текущему ходу в раунде.
+                Время сбрасывается на 0 в начале каждого раунда.
+            <!--Returns the game time of the current round, where the time is equal to
             the current turn in the round.
             <p/>
             A battle consists of multiple rounds.
             <p/>
-            Time is reset to 0 at the beginning of every round.
+            Time is reset to 0 at the beginning of every round.-->
             </summary>
         </member>
         <member name="M:Robocode.RobotInterfaces.Peer.IBasicRobotPeer.GetEnergy">
             <summary>
-            Returns the robot's current energy.
+                Возвращает текущую энергию робота.
+            <!--Returns the robot's current energy.-->
             </summary>
         </member>
         <member name="M:Robocode.RobotInterfaces.Peer.IBasicRobotPeer.GetX">
             <summary>
-            Returns the X position of the robot. (0,0) is at the bottom left of the
+                Возвращает X координату робота.
+            <!--Returns the X position of the robot. (0,0) is at the bottom left of the
             battlefield.
-            <seealso cref="M:Robocode.RobotInterfaces.Peer.IBasicRobotPeer.GetY"/>
+            <seealso cref="M:Robocode.RobotInterfaces.Peer.IBasicRobotPeer.GetY"/>-->
             </summary>
         </member>
         <member name="M:Robocode.RobotInterfaces.Peer.IBasicRobotPeer.GetY">
             <summary>
-            Returns the Y position of the robot. (0,0) is at the bottom left of the
+                Возвращает Y координату робота.
+            <!--Returns the Y position of the robot. (0,0) is at the bottom left of the
             battlefield.
-            <seealso cref="M:Robocode.RobotInterfaces.Peer.IBasicRobotPeer.GetX"/>
+            <seealso cref="M:Robocode.RobotInterfaces.Peer.IBasicRobotPeer.GetX"/>-->
             </summary>
         </member>
         <member name="M:Robocode.RobotInterfaces.Peer.IBasicRobotPeer.GetVelocity">
             <summary>
-            Returns the velocity of the robot measured in pixels/turn.
+                Возвращает текущее ускорение робота, измеряется в пикселях/шаг.
+                Максимальное ускорение робота задается в правилах.
+                Стандартное значение: 8 пикселей / ход.
+            <!--Returns the velocity of the robot measured in pixels/turn.
             <p/>
             The maximum velocity of a robot is defined by
             <see cref="F:Robocode.Rules.MAX_VELOCITY"/> (8 pixels / turn).
-            <seealso cref="F:Robocode.Rules.MAX_VELOCITY"/>
+            <seealso cref="F:Robocode.Rules.MAX_VELOCITY"/>-->
             </summary>
         </member>
         <member name="M:Robocode.RobotInterfaces.Peer.IBasicRobotPeer.GetBodyHeading">
             <summary>
-            Returns the direction that the robot's body is facing, in radians.
+                Возвращает направление тела робота в радианах.
+                Результат находится на интервале [0, 2*PI). 
+            <!--Returns the direction that the robot's body is facing, in radians.
             The value returned will be between 0 and 2 * PI (is excluded).
             <p/>
             Note that the heading in Robocode is like a compass, where 0 means North,
             PI / 2 means East, PI means South, and 3 * PI / 2 means West.
             <seealso cref="M:Robocode.RobotInterfaces.Peer.IBasicRobotPeer.GetGunHeading"/>
-            <seealso cref="M:Robocode.RobotInterfaces.Peer.IBasicRobotPeer.GetRadarHeading"/>
+            <seealso cref="M:Robocode.RobotInterfaces.Peer.IBasicRobotPeer.GetRadarHeading"/>-->
             </summary>
         </member>
         <member name="M:Robocode.RobotInterfaces.Peer.IBasicRobotPeer.GetGunHeading">
             <summary>
-            Returns the direction that the robot's gun is facing, in radians.
+                Возвращает направление орудия робота в радианах.
+                Результат находится на интервале [0, 2*PI). 
+            <!--Returns the direction that the robot's gun is facing, in radians.
             The value returned will be between 0 and 2 * PI (is excluded).
             <p/>
             Note that the heading in Robocode is like a compass, where 0 means North,
             PI / 2 means East, PI means South, and 3 * PI / 2 means West.
             <seealso cref="M:Robocode.RobotInterfaces.Peer.IBasicRobotPeer.GetBodyHeading"/>
-            <seealso cref="M:Robocode.RobotInterfaces.Peer.IBasicRobotPeer.GetRadarHeading"/>
+            <seealso cref="M:Robocode.RobotInterfaces.Peer.IBasicRobotPeer.GetRadarHeading"/>-->
             </summary>
         </member>
         <member name="M:Robocode.RobotInterfaces.Peer.IBasicRobotPeer.GetRadarHeading">
             <summary>
-            Returns the direction that the robot's radar is facing, in radians.
+                Возвращает направление радара робота в радианах.
+                Результат находится на интервале [0, 2*PI). 
+            <!--Returns the direction that the robot's radar is facing, in radians.
             The value returned will be between 0 and 2 * PI (is excluded).
             <p/>
             Note that the heading in Robocode is like a compass, where 0 means North,
             PI / 2 means East, PI means South, and 3 * PI / 2 means West.
             <seealso cref="M:Robocode.RobotInterfaces.Peer.IBasicRobotPeer.GetBodyHeading"/>
-            <seealso cref="M:Robocode.RobotInterfaces.Peer.IBasicRobotPeer.GetGunHeading"/>
+            <seealso cref="M:Robocode.RobotInterfaces.Peer.IBasicRobotPeer.GetGunHeading"/>-->
             </summary>
         </member>
         <member name="M:Robocode.RobotInterfaces.Peer.IBasicRobotPeer.GetGunHeat">
             <summary>
-            Returns the current heat of the gun. The gun cannot Fire unless this is
+                Возвращает текущий нагрев орудия робота. Робот не может стрелять,
+                если значение не равно 0.
+                Количество тепла выделяемого при выстреле равно 1 + (firePower / 5).
+                Каждый ход количество тепла уменьшается в соответствии с правилами (GetGunCoolingRate).
+                Все оружия роботов в начале раунда "холодные", нагрев равен 3.
+            <!--Returns the current heat of the gun. The gun cannot Fire unless this is
             0. (Calls to Fire will succeed, but will not actually Fire unless
             GetGunHeat() == 0).
             <p/>
@@ -239,40 +260,47 @@
             Note that all guns are "hot" at the start of each round, where the gun
             heat is 3.
             <seealso cref="M:Robocode.RobotInterfaces.Peer.IBasicRobotPeer.GetGunCoolingRate"/>
-            <seealso cref="M:Robocode.RobotInterfaces.Peer.IBasicRobotPeer.SetFire(System.Double)"/>
+            <seealso cref="M:Robocode.RobotInterfaces.Peer.IBasicRobotPeer.SetFire(System.Double)"/>-->
             </summary>
         </member>
         <member name="M:Robocode.RobotInterfaces.Peer.IBasicRobotPeer.GetBattleFieldWidth">
             <summary>
-            Returns the width of the current battlefield measured in pixels.
+                Возвращает ширину поля в пикселях.
+            <!--Returns the width of the current battlefield measured in pixels.-->
             </summary>
         </member>
         <member name="M:Robocode.RobotInterfaces.Peer.IBasicRobotPeer.GetBattleFieldHeight">
             <summary>
-            Returns the height of the current battlefield measured in pixels.
+                Возвращает высоту поля в пикселях.
+            <!--Returns the height of the current battlefield measured in pixels.-->
             </summary>
         </member>
         <member name="M:Robocode.RobotInterfaces.Peer.IBasicRobotPeer.GetOthers">
             <summary>
-            Returns how many opponents that are left in the current round.
+                Возвращает количество оставшихся соперников.
+            <!--Returns how many opponents that are left in the current round.-->
             </summary>
         </member>
         <member name="M:Robocode.RobotInterfaces.Peer.IBasicRobotPeer.GetNumSentries">
             <summary>
-            Returns how many sentry robots that are left in the current round.
+                Возвращает количество осавшихся sentry-роботов.
+           <!-- Returns how many sentry robots that are left in the current round.-->
             </summary>
         </member>
         <member name="M:Robocode.RobotInterfaces.Peer.IBasicRobotPeer.GetNumRounds">
             <summary>
-            Returns the number of rounds in the current battle.
-            <seealso cref="M:Robocode.RobotInterfaces.Peer.IBasicRobotPeer.GetRoundNum"/>
+                Возвращает количество оставшихся раундов.
+            <!--Returns the number of rounds in the current battle.
+            <seealso cref="M:Robocode.RobotInterfaces.Peer.IBasicRobotPeer.GetRoundNum"/>-->
             </summary>
         </member>
         <member name="M:Robocode.RobotInterfaces.Peer.IBasicRobotPeer.GetRoundNum">
             <summary>
-            Returns the number of the current round (0 to <see cref="M:Robocode.RobotInterfaces.Peer.IBasicRobotPeer.GetNumRounds"/> - 1)
+                Возвращает номер текущего раунда. 
+                Результат находится на интервале [0, N].
+            <!--Returns the number of the current round (0 to <see cref="M:Robocode.RobotInterfaces.Peer.IBasicRobotPeer.GetNumRounds"/> - 1)
             in the battle.
-            <seealso cref="M:Robocode.RobotInterfaces.Peer.IBasicRobotPeer.GetNumRounds"/>
+            <seealso cref="M:Robocode.RobotInterfaces.Peer.IBasicRobotPeer.GetNumRounds"/>-->
             </summary>
         </member>
         <member name="M:Robocode.RobotInterfaces.Peer.IBasicRobotPeer.GetSentryBorderSize">
@@ -287,18 +315,27 @@
         </member>
         <member name="M:Robocode.RobotInterfaces.Peer.IBasicRobotPeer.GetGunCoolingRate">
             <summary>
-            Returns the rate at which the gun will cool down, i.e. the amount of heat
+                Возвращает текущую скорость охлаждения орудия, т.е. количество тепла,
+                которое уменьшается за раунд.
+                По-умолчанию значение равно 0.1 / ход.
+                Задается в правилах.
+            <!--Returns the rate at which the gun will cool down, i.e. the amount of heat
             the gun heat will drop per turn.
             <p/>
             The gun cooling rate is default 0.1 / turn, but can be changed by the
             battle setup. So don't count on the cooling rate being 0.1!
             <seealso cref="M:Robocode.RobotInterfaces.Peer.IBasicRobotPeer.GetGunHeat"/>
-            <seealso cref="M:Robocode.RobotInterfaces.Peer.IBasicRobotPeer.SetFire(System.Double)"/>
+            <seealso cref="M:Robocode.RobotInterfaces.Peer.IBasicRobotPeer.SetFire(System.Double)"/>-->
             </summary>
         </member>
         <member name="M:Robocode.RobotInterfaces.Peer.IBasicRobotPeer.GetDistanceRemaining">
             <summary>
-            Returns the distance remaining in the robot's current move measured in
+                Возвращает оставшуюся дистанцию до цели, в текущем ходе, в пикселях.
+                Возможные значения:
+                x &lt; 0: робот движется назад;
+                0: робот стоит на месте;
+                x &gt; 0: робот движется вперед.
+            <!--Returns the distance remaining in the robot's current move measured in
             pixels.
             <p/>
             This call returns both positive and negative values. Positive values
@@ -307,48 +344,76 @@
             the robot currently stands still.
             <seealso cref="M:Robocode.RobotInterfaces.Peer.IBasicRobotPeer.GetBodyTurnRemaining"/>
             <seealso cref="M:Robocode.RobotInterfaces.Peer.IBasicRobotPeer.GetGunTurnRemaining"/>
-            <seealso cref="M:Robocode.RobotInterfaces.Peer.IBasicRobotPeer.GetRadarTurnRemaining"/>
+            <seealso cref="M:Robocode.RobotInterfaces.Peer.IBasicRobotPeer.GetRadarTurnRemaining"/>-->
             </summary>
         </member>
         <member name="M:Robocode.RobotInterfaces.Peer.IBasicRobotPeer.GetBodyTurnRemaining">
             <summary>
-            Returns the angle remaining in the robot's turn, in radians.
+                Возвращает оставшийся угол поворота, в текущем ходе, в радианах.
+                Возможные значения:
+                x &lt; 0: робот поворачивается влево;
+                0: робот стоит на месте;
+                x &gt; 0: робот поворачивается вправо.
+            <!--Returns the angle remaining in the robot's turn, in radians.
             <p/>
             This call returns both positive and negative values. Positive values
             means that the robot is currently turning to the right. Negative values
             means that the robot is currently turning to the left.
             <seealso cref="M:Robocode.RobotInterfaces.Peer.IBasicRobotPeer.GetDistanceRemaining"/>
             <seealso cref="M:Robocode.RobotInterfaces.Peer.IBasicRobotPeer.GetGunTurnRemaining"/>
-            <seealso cref="M:Robocode.RobotInterfaces.Peer.IBasicRobotPeer.GetRadarTurnRemaining"/>
+            <seealso cref="M:Robocode.RobotInterfaces.Peer.IBasicRobotPeer.GetRadarTurnRemaining"/>-->
             </summary>
         </member>
         <member name="M:Robocode.RobotInterfaces.Peer.IBasicRobotPeer.GetGunTurnRemaining">
             <summary>
-            Returns the angle remaining in the gun's turn, in radians.
+                Возвращает оставшийся угол поворота орудия, в текущем ходе, в радианах.
+                Возможные значения:
+                x &lt; 0: орудие поворачивается влево;
+                0: робот стоит на месте;
+                x &gt; 0: орудие поворачивается вправо.
+            <!--Returns the angle remaining in the gun's turn, in radians.
             <p/>
             This call returns both positive and negative values. Positive values
             means that the gun is currently turning to the right. Negative values
             means that the gun is currently turning to the left.
             <seealso cref="M:Robocode.RobotInterfaces.Peer.IBasicRobotPeer.GetDistanceRemaining"/>
             <seealso cref="M:Robocode.RobotInterfaces.Peer.IBasicRobotPeer.GetBodyTurnRemaining"/>
-            <seealso cref="M:Robocode.RobotInterfaces.Peer.IBasicRobotPeer.GetRadarTurnRemaining"/>
+            <seealso cref="M:Robocode.RobotInterfaces.Peer.IBasicRobotPeer.GetRadarTurnRemaining"/>-->
             </summary>
         </member>
         <member name="M:Robocode.RobotInterfaces.Peer.IBasicRobotPeer.GetRadarTurnRemaining">
             <summary>
-            Returns the angle remaining in the radar's turn, in radians.
+                Возвращает оставшийся угол поворота радара, в текущем ходе, в радианах.
+                Возможные значения:
+                x &lt; 0: радар поворачивается влево;
+                0: робот стоит на месте;
+                x &gt; 0: радар поворачивается вправо.
+            <!--Returns the angle remaining in the radar's turn, in radians.
             <p/>
             This call returns both positive and negative values. Positive values
             means that the radar is currently turning to the right. Negative values
             means that the radar is currently turning to the left.
             <seealso cref="M:Robocode.RobotInterfaces.Peer.IBasicRobotPeer.GetDistanceRemaining"/>
             <seealso cref="M:Robocode.RobotInterfaces.Peer.IBasicRobotPeer.GetBodyTurnRemaining"/>
-            <seealso cref="M:Robocode.RobotInterfaces.Peer.IBasicRobotPeer.GetGunTurnRemaining"/>
+            <seealso cref="M:Robocode.RobotInterfaces.Peer.IBasicRobotPeer.GetGunTurnRemaining"/>-->
             </summary>
         </member>
         <member name="M:Robocode.RobotInterfaces.Peer.IBasicRobotPeer.Execute">
              <summary>
-             Executes any pending actions, or continues executing actions that are
+                 Выполняет любые незавершенные действия, или продолжает выполнение текущих действий.
+                 Вызов функции возвращает значение после начала действия.
+                 
+                 Продвинутые (Advanced) роботы <em>должны</em> вызвать эту функцию, прежде чем
+                 выполнить какой-либо набор вызовов, например SetMove.
+                 Иначе эти вызовы никогда не вызовутся.
+                 Пример Run:
+                     SetTurnBody(90);
+                     SetMove(100);
+                     Execute();
+                     
+                     while (GetDistanceRemaining() &gt; 0) and (GetTurnRemaining() &gt; 0) do
+                        Execute();
+             <!--Executes any pending actions, or continues executing actions that are
              in process. This call returns after the actions have been started.
              <p/>
              Note that advanced robots <em>must</em> call this function in order to
@@ -368,12 +433,18 @@
                    Execute();
                }
                </code>
-             </example>
+             </example>-->
              </summary>
         </member>
         <member name="M:Robocode.RobotInterfaces.Peer.IBasicRobotPeer.Move(System.Double)">
              <summary>
-             Immediately moves your robot forward or backward by distance measured in
+                 Мгновенно двигает робота вперед или назад на указанное расстояние в пикселях.
+                 Вызов функции выполняется немедленно и не завершается до полного выполения.
+                 Если робот встретил стену, то движение завершается.
+                 Если робот встретил другого робота, то движение завершается в случае движения
+                 по направлению к другому роботу.
+                 На вход могут подаваться как положительные (вперед), так и негативные значения (назад).
+             <!--Immediately moves your robot forward or backward by distance measured in
              pixels.
              <p/>
              This call executes immediately, and does not return until it is complete,
@@ -397,7 +468,7 @@
                </code>
              </example>
              <seealso cref="M:Robocode.RobotInterfaces.IBasicEvents.OnHitWall(Robocode.HitWallEvent)"/>
-             <seealso cref="M:Robocode.RobotInterfaces.IBasicEvents.OnHitRobot(Robocode.HitRobotEvent)"/>
+             <seealso cref="M:Robocode.RobotInterfaces.IBasicEvents.OnHitRobot(Robocode.HitRobotEvent)"/>-->
              </summary>
              <param name="distance">
                The distance to move measured in pixels.
@@ -408,7 +479,10 @@
         </member>
         <member name="M:Robocode.RobotInterfaces.Peer.IBasicRobotPeer.TurnBody(System.Double)">
              <summary>
-             Immediately turns the robot's body to the right or left by radians.
+                 Мгновенно поворачивает робота направо на указанное расстояние в радианах.
+                 Вызов функции выполняется немедленно и не завершается до полного выполения.
+                 На вход могут подаваться как положительные (право), так и негативные значения (лево).
+             <!--Immediately turns the robot's body to the right or left by radians.
              This call executes immediately, and does not return until it is complete,
              i.e. when the angle remaining in the body's turn is 0.
              <p/>
@@ -428,7 +502,7 @@
              </example>
              <seealso cref="M:Robocode.RobotInterfaces.Peer.IBasicRobotPeer.TurnGun(System.Double)"/>
              <seealso cref="M:Robocode.RobotInterfaces.Peer.IStandardRobotPeer.TurnRadar(System.Double)"/>
-             <seealso cref="M:Robocode.RobotInterfaces.Peer.IBasicRobotPeer.Move(System.Double)"/>
+             <seealso cref="M:Robocode.RobotInterfaces.Peer.IBasicRobotPeer.Move(System.Double)"/>-->
              </summary>
              <param name="radians">
                The amount of radians to turn the robot's body.
@@ -439,7 +513,10 @@
         </member>
         <member name="M:Robocode.RobotInterfaces.Peer.IBasicRobotPeer.TurnGun(System.Double)">
              <summary>
-             Immediately turns the robot's gun to the right or left by radians.
+                 Мгновенно поворачивает орудие робота направо на указанное расстояние в радианах.
+                 Вызов функции выполняется немедленно и не завершается до полного выполения.
+                 На вход могут подаваться как положительные (право), так и негативные значения (лево).
+             <!--Immediately turns the robot's gun to the right or left by radians.
              This call executes immediately, and does not return until it is complete,
              i.e. when the angle remaining in the gun's turn is 0.
              <p/>
@@ -459,7 +536,7 @@
              </example>
              <seealso cref="M:Robocode.RobotInterfaces.Peer.IBasicRobotPeer.TurnBody(System.Double)"/>
              <seealso cref="M:Robocode.RobotInterfaces.Peer.IStandardRobotPeer.TurnRadar(System.Double)"/>
-             <seealso cref="M:Robocode.RobotInterfaces.Peer.IBasicRobotPeer.Move(System.Double)"/>
+             <seealso cref="M:Robocode.RobotInterfaces.Peer.IBasicRobotPeer.Move(System.Double)"/>-->
              </summary>
              <param name="radians">
                The amount of radians to turn the robot's gun.
@@ -843,7 +920,10 @@
         </member>
         <member name="M:Robocode.RobotInterfaces.Peer.IStandardRobotPeer.TurnRadar(System.Double)">
              <summary>
-             Immediately turns the robot's radar to the right or left by radians.
+                 Мгновенно поворачивает радар робота направо на указанное расстояние в радианах.
+                 Вызов функции выполняется немедленно и не завершается до полного выполения.
+                 На вход могут подаваться как положительные (право), так и негативные значения (лево).
+             <!--Immediately turns the robot's radar to the right or left by radians.
              This call executes immediately, and does not return until it is complete,
              i.e. when the angle remaining in the radar's turn is 0.
              <p/>
@@ -863,7 +943,7 @@
              </example>
              <seealso cref="M:Robocode.RobotInterfaces.Peer.IBasicRobotPeer.TurnBody(System.Double)"/>
              <seealso cref="M:Robocode.RobotInterfaces.Peer.IBasicRobotPeer.TurnGun(System.Double)"/>
-             <seealso cref="M:Robocode.RobotInterfaces.Peer.IBasicRobotPeer.Move(System.Double)"/>
+             <seealso cref="M:Robocode.RobotInterfaces.Peer.IBasicRobotPeer.Move(System.Double)"/>-->
              </summary>
              <param name="radians">
                The amount of radians to turn the robot's radar.
@@ -2784,7 +2864,13 @@
         </member>
         <member name="M:Robocode.Robot.Ahead(System.Double)">
              <summary>
-               Immediately moves your robot ahead (forward) by distance measured in
+                 Мгновенно двигает робота вперед на указанное расстояние в пикселях.
+                 Вызов функции выполняется немедленно и не завершается до полного выполения.
+                 Если робот встретил стену, то движение завершается.
+                 Если робот встретил другого робота, то движение завершается в случае движения
+                 по направлению к другому роботу.
+                 На вход могут подаваться как положительные (вперед), так и негативные значения (назад).
+               <!--Immediately moves your robot ahead (forward) by distance measured in
                pixels.
                <p/>
                This call executes immediately, and does not return until it is complete,
@@ -2806,7 +2892,7 @@
                  // Afterwards, move the robot 50 pixels backward
                  Ahead(-50);
                  </code>
-               </example>
+               </example>-->
              </summary>
              <param name="distance">
                The distance to move ahead measured in pixels.
@@ -2818,7 +2904,13 @@
         </member>
         <member name="M:Robocode.Robot.Back(System.Double)">
              <summary>
-               Immediately moves your robot backward by distance measured in pixels.
+                 Мгновенно двигает робота назад на указанное расстояние в пикселях.
+                 Вызов функции выполняется немедленно и не завершается до полного выполения.
+                 Если робот встретил стену, то движение завершается.
+                 Если робот встретил другого робота, то движение завершается в случае движения
+                 по направлению к другому роботу.
+                 На вход могут подаваться как положительные (назад), так и негативные значения (вперед).
+               <!--Immediately moves your robot backward by distance measured in pixels.
                <p/>
                This call executes immediately, and does not return until it is complete,
                i.e. when the remaining distance to move is 0.
@@ -2842,7 +2934,7 @@
                </example>
                <seealso cref="M:Robocode.Robot.Ahead(System.Double)"/>
                <seealso cref="M:Robocode.Robot.OnHitWall(Robocode.HitWallEvent)"/>
-               <seealso cref="M:Robocode.Robot.OnHitRobot(Robocode.HitRobotEvent)"/>
+               <seealso cref="M:Robocode.Robot.OnHitRobot(Robocode.HitRobotEvent)"/>-->
              </summary>
              <param name="distance">
                The distance to move back measured in pixels.
@@ -2871,7 +2963,10 @@
         </member>
         <member name="M:Robocode.Robot.TurnLeft(System.Double)">
              <summary>
-               Immediately turns the robot's body to the left by degrees.
+                 Мгновенно поворачивает робота налево на указанное расстояние в градусах.
+                 Вызов функции выполняется немедленно и не завершается до полного выполения.
+                 На вход могут подаваться как положительные (лево), так и негативные значения (право).
+               <!--Immediately turns the robot's body to the left by degrees.
                <p/>
                This call executes immediately, and does not return until it is complete,
                i.e. when the angle remaining in the robot's turn is 0.
@@ -2893,7 +2988,7 @@
                <seealso cref="M:Robocode.Robot.TurnGunLeft(System.Double)"/>
                <seealso cref="M:Robocode.Robot.TurnGunRight(System.Double)"/>
                <seealso cref="M:Robocode.Robot.TurnRadarLeft(System.Double)"/>
-               <seealso cref="M:Robocode.Robot.TurnRadarRight(System.Double)"/>
+               <seealso cref="M:Robocode.Robot.TurnRadarRight(System.Double)"/>-->
              </summary>
              <param name="degrees">
                The amount of degrees to turn the robot's body to the left.
@@ -2905,7 +3000,10 @@
         <member name="M:Robocode.Robot.TurnRight(System.Double)">
 
             <summary>
-              Immediately turns the robot's body to the right by degrees.
+                Мгновенно поворачивает робота направо на указанное расстояние в градусах.
+                Вызов функции выполняется немедленно и не завершается до полного выполения.
+                На вход могут подаваться как положительные (право), так и негативные значения (лево).
+              <!--Immediately turns the robot's body to the right by degrees.
               This call executes immediately, and does not return until it is complete,
               i.e. when the angle remaining in the robot's turn is 0.
               <p/>
@@ -2927,7 +3025,7 @@
               <seealso cref="M:Robocode.Robot.TurnGunLeft(System.Double)"/>
               <seealso cref="M:Robocode.Robot.TurnGunRight(System.Double)"/>
               <seealso cref="M:Robocode.Robot.TurnRadarLeft(System.Double)"/>
-              <seealso cref="M:Robocode.Robot.TurnRadarRight(System.Double)"/>
+              <seealso cref="M:Robocode.Robot.TurnRadarRight(System.Double)"/>-->
             </summary>
             <param name="degrees">
               The amount of degrees to turn the robot's body to the right.
@@ -2938,9 +3036,11 @@
         </member>
         <member name="M:Robocode.Robot.DoNothing">
             <summary>
-              Do nothing this turn, meaning that the robot will skip it's turn.
+                Робот делает ничего, пропуская свой ход.
+                Вызов функции выполняется немедленно и не завершается хода.
+              <!--Do nothing this turn, meaning that the robot will skip it's turn.
               <p />
-              This call executes immediately, and does not return until the turn is over.
+              This call executes immediately, and does not return until the turn is over.-->
             </summary>
         </member>
         <member name="M:Robocode.Robot.Fire(System.Double)">
@@ -3254,7 +3354,10 @@
         <member name="M:Robocode.Robot.TurnGunLeft(System.Double)">
 
             <summary>
-              Immediately turns the robot's gun to the left by degrees.
+                Мгновенно поворачивает орудие робота налево на указанное расстояние в градусах.
+                Вызов функции выполняется немедленно и не завершается до полного выполения.
+                На вход могут подаваться как положительные (лево), так и негативные значения (право).
+              <!--Immediately turns the robot's gun to the left by degrees.
               <p/>
               This call executes immediately, and does not return until it is complete,
               i.e. when the angle remaining in the gun's turn is 0.
@@ -3278,7 +3381,7 @@
               <seealso cref="M:Robocode.Robot.TurnRight(System.Double)"/>
               <seealso cref="M:Robocode.Robot.TurnRadarLeft(System.Double)"/>
               <seealso cref="M:Robocode.Robot.TurnRadarRight(System.Double)"/>
-              <seealso cref="P:Robocode.Robot.IsAdjustGunForRobotTurn"/>
+              <seealso cref="P:Robocode.Robot.IsAdjustGunForRobotTurn"/>-->
             </summary>
             <param name="degrees">
               The amount of degrees to turn the robot's gun to the left.
@@ -3288,9 +3391,11 @@
             </param>
         </member>
         <member name="M:Robocode.Robot.TurnGunRight(System.Double)">
-
             <summary>
-              Immediately turns the robot's gun to the right by degrees.
+                Мгновенно поворачивает орудие робота направо на указанное расстояние в градусах.
+                Вызов функции выполняется немедленно и не завершается до полного выполения.
+                На вход могут подаваться как положительные (право), так и негативные значения (лево).
+              <!--Immediately turns the robot's gun to the right by degrees.
               This call executes immediately, and does not return until it is complete,
               i.e. when the angle remaining in the gun's turn is 0.
               <p/>
@@ -3313,7 +3418,7 @@
               <seealso cref="M:Robocode.Robot.TurnRight(System.Double)"/>
               <seealso cref="M:Robocode.Robot.TurnRadarLeft(System.Double)"/>
               <seealso cref="M:Robocode.Robot.TurnRadarRight(System.Double)"/>
-              <seealso cref="P:Robocode.Robot.IsAdjustGunForRobotTurn"/>
+              <seealso cref="P:Robocode.Robot.IsAdjustGunForRobotTurn"/>-->
             </summary>
             <param name="degrees">
               The amount of degrees to turn the robot's gun to the right.
@@ -3324,7 +3429,10 @@
         </member>
         <member name="M:Robocode.Robot.TurnRadarLeft(System.Double)">
              <summary>
-               Immediately turns the robot's radar to the left by degrees.
+                 Мгновенно поворачивает радар робота налево на указанное расстояние в градусах.
+                 Вызов функции выполняется немедленно и не завершается до полного выполения.
+                 На вход могут подаваться как положительные (лево), так и негативные значения (право).
+               <!--Immediately turns the robot's radar to the left by degrees.
                <p/>
                This call executes immediately, and does not return until it is complete,
                i.e. when the angle remaining in the radar's turn is 0.
@@ -3348,7 +3456,7 @@
                <seealso cref="M:Robocode.Robot.TurnGunLeft(System.Double)"/>
                <seealso cref="M:Robocode.Robot.TurnGunRight(System.Double)"/>
                <seealso cref="P:Robocode.Robot.IsAdjustRadarForRobotTurn"/>
-               <seealso cref="P:Robocode.Robot.IsAdjustRadarForGunTurn"/>
+               <seealso cref="P:Robocode.Robot.IsAdjustRadarForGunTurn"/>-->
              </summary>
              <param name="degrees">
                The amount of degrees to turn the robot's radar to the left.
@@ -3358,9 +3466,11 @@
              </param>
         </member>
         <member name="M:Robocode.Robot.TurnRadarRight(System.Double)">
-
             <summary>
-              Immediately turns the robot's radar to the right by degrees.
+                Мгновенно поворачивает радар робота направо на указанное расстояние в градусах.
+                Вызов функции выполняется немедленно и не завершается до полного выполения.
+                На вход могут подаваться как положительные (право), так и негативные значения (лево).
+              <!--Immediately turns the robot's radar to the right by degrees.
               This call executes immediately, and does not return until it is complete,
               i.e. when the angle remaining in the radar's turn is 0.
               <p/>
@@ -3384,7 +3494,7 @@
               <seealso cref="M:Robocode.Robot.TurnGunLeft(System.Double)"/>
               <seealso cref="M:Robocode.Robot.TurnGunRight(System.Double)"/>
               <seealso cref="P:Robocode.Robot.IsAdjustRadarForRobotTurn"/>
-              <seealso cref="P:Robocode.Robot.IsAdjustRadarForGunTurn"/>
+              <seealso cref="P:Robocode.Robot.IsAdjustRadarForGunTurn"/>-->
             </summary>
             <param name="degrees">
               The amount of degrees to turn the robot's radar to the right.
@@ -3724,7 +3834,10 @@
         </member>
         <member name="P:Robocode.Robot.BodyColor">
              <summary>
-               Sets the color of the robot's body.
+                 Устанавливает цвет тела робота.
+                 По-умолчанию цвет голубой.
+                 Не забудьте включить {$reference System.Drawing.dll} в заголовке файла.
+               <!--Sets the color of the robot's body.
                <p/>
                A <em>null</em> indicates the default (blue) color.
                <p/>
@@ -3748,13 +3861,15 @@
                <seealso cref="P:Robocode.Robot.RadarColor"/>
                <seealso cref="P:Robocode.Robot.BulletColor"/>
                <seealso cref="P:Robocode.Robot.ScanColor"/>
-               <seealso cref="T:System.Drawing.Color"/>
+               <seealso cref="T:System.Drawing.Color"/>-->
              </summary>
         </member>
         <member name="P:Robocode.Robot.GunColor">
-
             <summary>
-              Sets the color of the robot's gun.
+                Устанавливает цвет орудия робота.
+                По-умолчанию цвет голубой.
+                Не забудьте включить {$reference System.Drawing.dll} в заголовке файла.
+              <!--Sets the color of the robot's gun.
               <p/>
               A <em>null</em> indicates the default (blue) color.
               <p/>
@@ -3779,13 +3894,15 @@
               <seealso cref="P:Robocode.Robot.RadarColor"/>
               <seealso cref="P:Robocode.Robot.BulletColor"/>
               <seealso cref="P:Robocode.Robot.ScanColor"/>
-              <seealso cref="T:System.Drawing.Color"/>
+              <seealso cref="T:System.Drawing.Color"/>-->
             </summary>
         </member>
         <member name="P:Robocode.Robot.RadarColor">
-
             <summary>
-              Sets the color of the robot's radar.
+                Устанавливает цвет радара робота.
+                По-умолчанию цвет голубой.
+                Не забудьте включить {$reference System.Drawing.dll} в заголовке файла.
+              <!--Sets the color of the robot's radar.
               <p/>
               A <em>null</em> indicates the default (blue) color.
               <p/>
@@ -3810,13 +3927,15 @@
               <seealso cref="P:Robocode.Robot.GunColor"/>
               <seealso cref="P:Robocode.Robot.BulletColor"/>
               <seealso cref="P:Robocode.Robot.ScanColor"/>
-              <seealso cref="T:System.Drawing.Color"/>
+              <seealso cref="T:System.Drawing.Color"/>-->
             </summary>
         </member>
         <member name="P:Robocode.Robot.BulletColor">
-
             <summary>
-              Sets the color of the robot's bullets.
+                Устанавливает цвет пуль робота.
+                По-умолчанию цвет голубой.
+                Не забудьте включить {$reference System.Drawing.dll} в заголовке файла.
+              <!--Sets the color of the robot's bullets.
               <p/>
               A <em>null</em> indicates the default white color.
               <p/>
@@ -3841,13 +3960,15 @@
               <seealso cref="P:Robocode.Robot.GunColor"/>
               <seealso cref="P:Robocode.Robot.RadarColor"/>
               <seealso cref="P:Robocode.Robot.ScanColor"/>
-              <seealso cref="T:System.Drawing.Color"/>
+              <seealso cref="T:System.Drawing.Color"/>-->
             </summary>
         </member>
         <member name="P:Robocode.Robot.ScanColor">
-
             <summary>
-              Sets the color of the robot's scan arc.
+                Устанавливает цвет сканирующей дуги робота.
+                По-умолчанию цвет голубой.
+                Не забудьте включить {$reference System.Drawing.dll} в заголовке файла.
+              <!--Sets the color of the robot's scan arc.
               <p/>
               A <em>null</em> indicates the default (blue) color.
               <p/>
@@ -3872,12 +3993,13 @@
               <seealso cref="P:Robocode.Robot.GunColor"/>
               <seealso cref="P:Robocode.Robot.RadarColor"/>
               <seealso cref="P:Robocode.Robot.BulletColor"/>
-              <seealso cref="T:System.Drawing.Color"/>
+              <seealso cref="T:System.Drawing.Color"/>-->
             </summary>
         </member>
         <member name="P:Robocode.Robot.Energy">
             <summary>
-              Returns the robot's current energy.
+                Возвращает текущую энергию робота.
+              <!--Returns the robot's current energy.-->
             </summary>
         </member>
         <member name="P:Robocode.Robot.Graphics">
@@ -4940,7 +5062,10 @@
         </member>
         <member name="M:Robocode.AdvancedRobot.TurnLeftRadians(System.Double)">
             <summary>
-              Immediately turns the robot's body to the left by radians.
+                Мгновенно поворачивает робота налево на указанное расстояние в радианах.
+                Вызов функции выполняется немедленно и не завершается до полного выполения.
+                На вход могут подаваться как положительные (лево), так и негативные значения (право).
+              <!--Immediately turns the robot's body to the left by radians.
               <p/>
               This call executes immediately, and does not return until it is complete,
               i.e. when the angle remaining in the robot's turn is 0.
@@ -4969,7 +5094,7 @@
               <seealso cref="M:Robocode.AdvancedRobot.TurnRadarLeftRadians(System.Double)"/>
               <seealso cref="M:Robocode.Robot.TurnRadarRight(System.Double)"/>
               <seealso cref="M:Robocode.AdvancedRobot.TurnRadarRightRadians(System.Double)"/>
-              <seealso cref="P:Robocode.Robot.IsAdjustGunForRobotTurn"/>
+              <seealso cref="P:Robocode.Robot.IsAdjustGunForRobotTurn"/>-->
             </summary>
               <param name="radians">the amount of radians to turn the robot's body to the left.
               If radians &gt; 0 the robot will turn right.
@@ -4978,7 +5103,10 @@
         </member>
         <member name="M:Robocode.AdvancedRobot.TurnRightRadians(System.Double)">
             <summary>
-              Immediately turns the robot's body to the right by radians.
+                Мгновенно поворачивает робота направо на указанное расстояние в радианах.
+                Вызов функции выполняется немедленно и не завершается до полного выполения.
+                На вход могут подаваться как положительные (право), так и негативные значения (лево).
+              <!--Immediately turns the robot's body to the right by radians.
               This call executes immediately, and does not return until it is complete,
               i.e. when the angle remaining in the robot's turn is 0.
               <p/>
@@ -5006,7 +5134,7 @@
               <seealso cref="M:Robocode.AdvancedRobot.TurnRadarLeftRadians(System.Double)"/>
               <seealso cref="M:Robocode.Robot.TurnRadarRight(System.Double)"/>
               <seealso cref="M:Robocode.AdvancedRobot.TurnRadarRightRadians(System.Double)"/>
-              <seealso cref="P:Robocode.Robot.IsAdjustGunForRobotTurn"/>
+              <seealso cref="P:Robocode.Robot.IsAdjustGunForRobotTurn"/>-->
             </summary>
               <param name="radians"> the amount of radians to turn the robot's body to the right.
               If radians &gt; 0 the robot will turn right.
@@ -5177,7 +5305,10 @@
         </member>
         <member name="M:Robocode.AdvancedRobot.TurnGunLeftRadians(System.Double)">
             <summary>
-              Immediately turns the robot's gun to the left by radians.
+                Мгновенно поворачивает орудие робота налево на указанное расстояние в радианах.
+                Вызов функции выполняется немедленно и не завершается до полного выполения.
+                На вход могут подаваться как положительные (лево), так и негативные значения (право).
+              <!--Immediately turns the robot's gun to the left by radians.
               <p/>
               This call executes immediately, and does not return until it is complete,
               i.e. when the angle remaining in the gun's turn is 0.
@@ -5206,7 +5337,7 @@
               <seealso cref="M:Robocode.AdvancedRobot.TurnRadarLeftRadians(System.Double)"/>
               <seealso cref="M:Robocode.Robot.TurnRadarRight(System.Double)"/>
               <seealso cref="M:Robocode.AdvancedRobot.TurnRadarRightRadians(System.Double)"/>
-              <seealso cref="P:Robocode.Robot.IsAdjustGunForRobotTurn"/>
+              <seealso cref="P:Robocode.Robot.IsAdjustGunForRobotTurn"/>-->
             </summary>
               <param name="radians">the amount of radians to turn the robot's gun to the left.
               If radians &gt; 0 the robot's gun will turn left.
@@ -5215,7 +5346,10 @@
         </member>
         <member name="M:Robocode.AdvancedRobot.TurnGunRightRadians(System.Double)">
             <summary>
-              Immediately turns the robot's gun to the right by radians.
+                Мгновенно поворачивает орудие робота направо на указанное расстояние в радианах.
+                Вызов функции выполняется немедленно и не завершается до полного выполения.
+                На вход могут подаваться как положительные (право), так и негативные значения (лево).
+              <!--Immediately turns the robot's gun to the right by radians.
               This call executes immediately, and does not return until it is complete,
               i.e. when the angle remaining in the gun's turn is 0.
               <p/>
@@ -5243,7 +5377,7 @@
               <seealso cref="M:Robocode.AdvancedRobot.TurnRadarLeftRadians(System.Double)"/>
               <seealso cref="M:Robocode.Robot.TurnRadarRight(System.Double)"/>
               <seealso cref="M:Robocode.AdvancedRobot.TurnRadarRightRadians(System.Double)"/>
-              <seealso cref="P:Robocode.Robot.IsAdjustGunForRobotTurn"/>
+              <seealso cref="P:Robocode.Robot.IsAdjustGunForRobotTurn"/>-->
             </summary>
               <param name="radians">the amount of radians to turn the robot's gun to the right.
               If radians &gt; 0 the robot's gun will turn right.
@@ -5252,7 +5386,10 @@
         </member>
         <member name="M:Robocode.AdvancedRobot.TurnRadarLeftRadians(System.Double)">
             <summary>
-              Immediately turns the robot's radar to the left by radians.
+                Мгновенно поворачивает радар робота налево на указанное расстояние в радианах.
+                Вызов функции выполняется немедленно и не завершается до полного выполения.
+                На вход могут подаваться как положительные (лево), так и негативные значения (право).
+              <!--Immediately turns the robot's radar to the left by radians.
               <p/>
               This call executes immediately, and does not return until it is complete,
               i.e. when the angle remaining in the radar's turn is 0.
@@ -5282,7 +5419,7 @@
               <seealso cref="M:Robocode.Robot.TurnGunRight(System.Double)"/>
               <seealso cref="M:Robocode.AdvancedRobot.TurnGunRightRadians(System.Double)"/>
               <seealso cref="P:Robocode.Robot.IsAdjustRadarForRobotTurn"/>
-              <seealso cref="P:Robocode.Robot.IsAdjustRadarForGunTurn"/>
+              <seealso cref="P:Robocode.Robot.IsAdjustRadarForGunTurn"/>-->
             </summary>
               <param name="radians">the amount of radians to turn the robot's radar to the left.
               If radians &gt; 0 the robot's radar will turn left.
@@ -5291,7 +5428,10 @@
         </member>
         <member name="M:Robocode.AdvancedRobot.TurnRadarRightRadians(System.Double)">
             <summary>
-              Immediately turns the robot's radar to the right by radians.
+                Мгновенно поворачивает радар робота направо на указанное расстояние в радианах.
+                Вызов функции выполняется немедленно и не завершается до полного выполения.
+                На вход могут подаваться как положительные (право), так и негативные значения (лево).
+              <!--Immediately turns the robot's radar to the right by radians.
               This call executes immediately, and does not return until it is complete,
               i.e. when the angle remaining in the radar's turn is 0.
               <p/>
@@ -5320,7 +5460,7 @@
               <seealso cref="M:Robocode.Robot.TurnGunRight(System.Double)"/>
               <seealso cref="M:Robocode.AdvancedRobot.TurnGunRightRadians(System.Double)"/>
               <seealso cref="P:Robocode.Robot.IsAdjustRadarForRobotTurn"/>
-              <seealso cref="P:Robocode.Robot.IsAdjustRadarForGunTurn"/>
+              <seealso cref="P:Robocode.Robot.IsAdjustRadarForGunTurn"/>-->
             </summary>
               <param name="radians">the amount of radians to turn the robot's radar to the right.
               If radians &gt; 0 the robot's radar will turn right.
@@ -6226,7 +6366,8 @@
         </member>
         <member name="P:Robocode.HitRobotEvent.Energy">
             <summary>
-            Returns the amount of energy of the robot you hit.
+                Возвращает текущую энергию робота, в которого вы выстрелили и попали.
+            <!--Returns the amount of energy of the robot you hit.-->
             </summary>
         </member>
         <member name="P:Robocode.HitRobotEvent.Name">
@@ -6420,7 +6561,8 @@
         </member>
         <member name="F:Robocode.JuniorRobot.heading">
              <summary>
-             Current heading angle of this robot (in degrees).
+                 Текущий угол направления робота в градусах.
+            <!-- Current heading angle of this robot (in degrees).
 
              <seealso cref="M:Robocode.JuniorRobot.TurnLeft(System.Int32)"/>
              <seealso cref="M:Robocode.JuniorRobot.TurnRight(System.Int32)"/>
@@ -6428,39 +6570,42 @@
              <seealso cref="M:Robocode.JuniorRobot.TurnAheadLeft(System.Int32,System.Int32)"/>
              <seealso cref="M:Robocode.JuniorRobot.TurnAheadRight(System.Int32,System.Int32)"/>
              <seealso cref="M:Robocode.JuniorRobot.TurnBackLeft(System.Int32,System.Int32)"/>
-             <seealso cref="M:Robocode.JuniorRobot.TurnBackRight(System.Int32,System.Int32)"/>
+             <seealso cref="M:Robocode.JuniorRobot.TurnBackRight(System.Int32,System.Int32)"/>-->
              </summary>
         </member>
         <member name="F:Robocode.JuniorRobot.gunHeading">
              <summary>
-             Current gun heading angle of this robot (in degrees).
+                 Текущий угол направления орудия робота в градусах.
+             <!--Current gun heading angle of this robot (in degrees).
 
              <seealso cref="F:Robocode.JuniorRobot.gunBearing"/>
              <seealso cref="M:Robocode.JuniorRobot.TurnGunLeft(System.Int32)"/>
              <seealso cref="M:Robocode.JuniorRobot.TurnGunRight(System.Int32)"/>
              <seealso cref="M:Robocode.JuniorRobot.TurnGunTo(System.Int32)"/>
-             <seealso cref="M:Robocode.JuniorRobot.BearGunTo(System.Int32)"/>
+             <seealso cref="M:Robocode.JuniorRobot.BearGunTo(System.Int32)"/>-->
              </summary>
         </member>
         <member name="F:Robocode.JuniorRobot.gunBearing">
              <summary>
-             Current gun heading angle of this robot compared to its body (in degrees).
+                 Текущий угол направления орудия робота минус текущее направление тела робота в градусах.
+             <!--Current gun heading angle of this robot compared to its body (in degrees).
 
              <seealso cref="F:Robocode.JuniorRobot.gunHeading"/>
              <seealso cref="M:Robocode.JuniorRobot.TurnGunLeft(System.Int32)"/>
              <seealso cref="M:Robocode.JuniorRobot.TurnGunRight(System.Int32)"/>
              <seealso cref="M:Robocode.JuniorRobot.TurnGunTo(System.Int32)"/>
-             <seealso cref="M:Robocode.JuniorRobot.BearGunTo(System.Int32)"/>
+             <seealso cref="M:Robocode.JuniorRobot.BearGunTo(System.Int32)"/>-->
              </summary>
         </member>
         <member name="F:Robocode.JuniorRobot.gunReady">
              <summary>
-             Flag specifying if the gun is ready to Fire, i.e. gun heat &lt;= 0.
+                 Флаг, возвращающий True, если орудие готово, т.е. нагрев &lt;= 0, иначе False.
+             <!--Flag specifying if the gun is ready to Fire, i.e. gun heat &lt;= 0.
              true means that the gun is able to Fire; false
              means that the gun cannot Fire yet as it still needs to cool down.
 
              <seealso cref="M:Robocode.JuniorRobot.Fire"/>
-             <seealso cref="M:Robocode.JuniorRobot.Fire(System.Double)"/>
+             <seealso cref="M:Robocode.JuniorRobot.Fire(System.Double)"/>-->
              </summary>
         </member>
         <member name="F:Robocode.JuniorRobot.scannedDistance">
@@ -6990,7 +7135,8 @@
         </member>
         <member name="P:Robocode.JuniorRobot.Energy">
             <summary>
-            Current energy of this robot, where 100 means full energy and 0 means no energy (dead).
+                Возвращает текущую энергию робота.
+            <!--Current energy of this robot, where 100 means full energy and 0 means no energy (dead).-->
             </summary>
         </member>
         <member name="P:Robocode.JuniorRobot.RobotX">
@@ -7993,7 +8139,8 @@
         </member>
         <member name="P:Robocode.RobotStatus.Energy">
             <summary>
-            Returns the robot's current energy.
+                Возвращает текущую энергию робота.
+            <!--Returns the robot's current energy.-->
             </summary>
         </member>
         <member name="P:Robocode.RobotStatus.X">
@@ -8441,7 +8588,8 @@
         </member>
         <member name="P:Robocode.ScannedRobotEvent.Energy">
             <summary>
-            Returns the energy of the robot.
+                Возвращает текущую энергию робота.
+            <!--Returns the energy of the robot.-->
             </summary>
         </member>
         <member name="P:Robocode.ScannedRobotEvent.Heading">
