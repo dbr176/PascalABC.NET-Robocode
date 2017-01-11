@@ -84,17 +84,15 @@ namespace robopascal_runner
 
         private void runButton_Click(object sender, EventArgs e)
         {
-            var batPath = Path.Combine(PabcWork, RcRobocode, RcStart);
+            var batPath = $"{Path.Combine(PabcWork, RcRobocode, RcStart)}";
             var psi = new ProcessStartInfo
             {
+                WorkingDirectory = Path.Combine(PabcWork, RcRobocode),
                 CreateNoWindow = false,
                 UseShellExecute = false,
-                RedirectStandardOutput = true,
-                RedirectStandardError = true,
-                FileName = "cmd.exe",
-                Arguments = batPath
+                FileName = batPath
             };
-
+            
             var process = Process.Start(psi);
         }
 
