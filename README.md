@@ -18,11 +18,7 @@ Robocode включает в себя дистрибутив robocode'а и вс
   * [PascalABC.NET](http://pascalabc.net/)
   * [Java](https://java.com/)
 
-Необходимо скомпилировать robocode\RobocodeRun.pas
-```
-    cd robocode
-    C:\Program Files (x86)\PascalABC.NET\pabcnetcclear.exe RobocodeRun.pas
-```
+Необходимо скомпилировать robocode-runner и скопировать .exe в robocode/
 
 ## Сборка установочного пакета
 

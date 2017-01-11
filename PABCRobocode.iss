@@ -1,5 +1,5 @@
-; Г‘ГЄГ°ГЁГЇГІ Г±Г®Г§Г¤Г Г­ГЁГї ГіГ±ГІГ Г­Г®ГўГ№ГЁГЄГ  PascalABC.NET Robocode
-; ГЃГЁГ°ГѕГЄГ®Гў ГЂ.Г‘.
+; Скрипт создания установщика PascalABC.NET Robocode
+; Бирюков А.С.
 ; 2016
 
 #define MyAppName             "PascalABC.NET Robocode"
@@ -44,13 +44,13 @@ Source: "robopascal/*"; DestDir: "{app}/robopascal"; Flags: ignoreversion recurs
 
 
 [Icons]
-; ГЊГҐГ­Гѕ ГЏГіГ±ГЄ
-Name: "{group}\Robocode-Г°Г®ГЎГ®ГІ"; Filename: "{app}/robopascal/PABCRobocode.pas"; WorkingDir: "{app}"; Comment: "{cm:AboutRobocode}"; IconFilename: "{app}/robocode.ico"
-Name: "{group}\Г‡Г ГЇГіГ±ГІГЁГІГј Robocode"; Filename: "{app}/RobocodeRun.exe"; WorkingDir: "{app}"; Comment: "{cm:RunRobocode}"; IconFilename: "{app}/robocode.ico"
-Name: "{group}\Г“Г¤Г Г«ГЁГІГј PascalABC.NET Robocode"; Filename: "{uninstallexe}"
-; ГђГ ГЎГ®Г·ГЁГ© Г±ГІГ®Г«
-Name: "{userdesktop}\Robocode-Г°Г®ГЎГ®ГІ"; Filename: "{app}/robopascal/PABCRobocode.pas"; WorkingDir: "{app}"; Comment: "{cm:AboutRobocode}"; IconFilename: "{app}/robocode.ico"
-Name: "{userdesktop}\Г‡Г ГЇГіГ±ГІГЁГІГј Robocode"; Filename: "{app}/RobocodeRun.exe"; WorkingDir: "{app}"; Comment: "{cm:RunRobocode}"; IconFilename: "{app}/robocode.ico"
+; Меню Пуск
+Name: "{group}\Robocode-робот"; Filename: "{app}/robopascal/PABCRobocode.pas"; WorkingDir: "{app}"; Comment: "{cm:AboutRobocode}"; IconFilename: "{app}/robocode.ico"
+Name: "{group}\Запустить Robocode"; Filename: "{app}/robopascal-runner.exe"; WorkingDir: "{app}"; Comment: "{cm:RunRobocode}"; IconFilename: "{app}/robocode.ico"
+Name: "{group}\Удалить PascalABC.NET Robocode"; Filename: "{uninstallexe}"
+; Рабочий стол
+Name: "{userdesktop}\Robocode-робот"; Filename: "{app}/robopascal/PABCRobocode.pas"; WorkingDir: "{app}"; Comment: "{cm:AboutRobocode}"; IconFilename: "{app}/robocode.ico"
+Name: "{userdesktop}\Запустить Robocode"; Filename: "{app}/robopascal-runner.exe"; WorkingDir: "{app}"; Comment: "{cm:RunRobocode}"; IconFilename: "{app}/robocode.ico"
 
 
 [Code]
@@ -71,18 +71,18 @@ var
   WorkPath: AnsiString;
 begin
   Result := True;
-  // Г“Г±ГІГ Г­Г®ГўГ«ГҐГ­ Г«ГЁ PascalABC.NET
+  // Установлен ли PascalABC.NET
   if GetPABCPath = '' then
   begin
     Result := False;
     MsgBox(ExpandConstant('{cm:PascalNotFound}'), mbInformation, MB_OK);
   end;
 
-  // Г“Г±ГІГ Г­Г ГўГ«ГЁГўГ ГҐГ¬ ГЇГіГІГј ГіГ±ГІГ Г­Г®ГўГЄГЁ Гў PABCWork.NET
+  // Устанавливаем путь установки в PABCWork.NET
   if not LoadStringFromFile(GetPABCPath + '/' + '{#PABCWorkINI}', WorkPath) then
   begin
     Result := False;
-    MsgBox(ExpandConstant('{cm:PascalNotFound}'), mbInformation, MB_OK); // TODO: Г¤Г°ГіГЈГ Гї Г®ГёГЁГЎГЄГ 
+    MsgBox(ExpandConstant('{cm:PascalNotFound}'), mbInformation, MB_OK); // TODO: другая ошибка
   end;
   InstallDir := WorkPath + '/' + '{#RobocodeInstallPrefix}';
 end;
@@ -99,10 +99,10 @@ Name: "russian"; MessagesFile: "compiler:Languages\Russian.isl"
 
 [CustomMessages]
 english.PascalNotFound=PascalABC.NET not found!
-russian.PascalNotFound=PascalABC.NET Г­ГҐ Г­Г Г©Г¤ГҐГ­!
+russian.PascalNotFound=PascalABC.NET не найден!
 
-russian.RunRobocode=Г‡Г ГЇГіГ±ГІГЁГІГј Robocode Г±Г® Г±ГўГ®ГЁГ¬ Г°Г®ГЎГ®ГІГ®Г¬
+russian.RunRobocode=Запустить Robocode со своим роботом
 english.RunRobocode=Run Robocode with your own robot
 
-russian.AboutRobocode=ГЋГІГЄГ°Г»ГўГ ГҐГІ ГґГ Г©Г« PascalABC.NET, Гў ГЄГ®ГІГ®Г°Г®Г¬ Г¬Г®Г¦Г­Г® Г®ГЇГЁГ±Г ГІГј Г°Г®ГЎГ®ГІГ 
+russian.AboutRobocode=Открывает файл PascalABC.NET, в котором можно описать робота
 english.AboutRobocode=Open PascalABC.NET file, where you can write your own robot
