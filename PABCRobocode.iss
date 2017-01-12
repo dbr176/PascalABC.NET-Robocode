@@ -12,6 +12,10 @@
 #define PABCWorkINI           "pabcworknet.ini"
 #define RobocodeInstallPrefix "Robocode"
 
+#define MinJRE                "1.6"
+#define WebJRE                "https://java.com"
+
+
 [Setup]
 ; NOTE: The value of AppId uniquely identifies this application.
 ; Do not use the same AppId value in installers for other applications.
@@ -45,11 +49,9 @@ Source: "robopascal/*"; DestDir: "{app}/robopascal"; Flags: ignoreversion recurs
 
 [Icons]
 ; Меню Пуск
-Name: "{group}\Robocode-робот"; Filename: "{app}/robopascal/PABCRobocode.pas"; WorkingDir: "{app}"; Comment: "{cm:AboutRobocode}"; IconFilename: "{app}/robocode.ico"
 Name: "{group}\Запустить Robocode"; Filename: "{app}/robopascal-runner.exe"; WorkingDir: "{app}"; Comment: "{cm:RunRobocode}"; IconFilename: "{app}/robocode.ico"
 Name: "{group}\Удалить PascalABC.NET Robocode"; Filename: "{uninstallexe}"
 ; Рабочий стол
-Name: "{userdesktop}\Robocode-робот"; Filename: "{app}/robopascal/PABCRobocode.pas"; WorkingDir: "{app}"; Comment: "{cm:AboutRobocode}"; IconFilename: "{app}/robocode.ico"
 Name: "{userdesktop}\Запустить Robocode"; Filename: "{app}/robopascal-runner.exe"; WorkingDir: "{app}"; Comment: "{cm:RunRobocode}"; IconFilename: "{app}/robocode.ico"
 
 
@@ -66,17 +68,52 @@ begin
   end;
 end;
 
+function IsJREInstalled: Boolean;
+var
+  JREVersion: string;
+begin
+  Result := RegQueryStringValue(HKLM32, 'Software\JavaSoft\Java Runtime Environment',
+    'CurrentVersion', JREVersion);
+
+  if not Result and IsWin64 then
+    Result := RegQueryStringValue(HKLM64, 'Software\JavaSoft\Java Runtime Environment',
+      'CurrentVersion', JREVersion);
+
+  if Result then
+    Result := CompareStr(JREVersion, '{#MinJRE}') >= 0;
+end;
+
+
+function IsPascalInstalled: Boolean;
+begin
+  Result := GetPABCPath <> '';
+end;
+
+
+
 function InitializeSetup: Boolean;
 var
   WorkPath: AnsiString;
+  ErrorCode: Integer;
 begin
   Result := True;
-  // Установлен ли PascalABC.NET
-  if GetPABCPath = '' then
+  if not IsPascalInstalled then
   begin
-    Result := False;
-    MsgBox(ExpandConstant('{cm:PascalNotFound}'), mbInformation, MB_OK);
+    if MsgBox(ExpandConstant('{cm:PascalNotFound}'), mbConfirmation, MB_YESNO) = IDYES then
+    begin
+      Result := False;
+      ShellExec('', '{#MyAppURL}', '', '', SW_SHOWNORMAL, ewNoWait, ErrorCode);
+    end;
   end;
+
+  if not IsJREInstalled then
+  begin
+    if MsgBox(ExpandConstant('{cm:JavaNotFound}'), mbConfirmation, MB_YESNO) = IDYES then
+    begin
+      ShellExec('', '{#WebJRE}', '', '', SW_SHOWNORMAL, ewNoWait, ErrorCode);
+    end;
+  end;
+
 
   // Устанавливаем путь установки в PABCWork.NET
   if not LoadStringFromFile(GetPABCPath + '/' + '{#PABCWorkINI}', WorkPath) then
@@ -98,11 +135,11 @@ Name: "english"; MessagesFile: "compiler:Default.isl"
 Name: "russian"; MessagesFile: "compiler:Languages\Russian.isl"
 
 [CustomMessages]
-english.PascalNotFound=PascalABC.NET not found!
-russian.PascalNotFound=PascalABC.NET не найден!
+english.PascalNotFound=PascalABC.NET not found! Do you want to download it now?
+russian.PascalNotFound=PascalABC.NET не найден! Перейти на сайт для загрузки?
 
-russian.RunRobocode=Запустить Robocode со своим роботом
-english.RunRobocode=Run Robocode with your own robot
+english.JavaNotFound=JRE not found! Do you want to download it now?
+russian.JavaNotFound=JRE не найден! Перейти на сайт для загрузки?
 
-russian.AboutRobocode=Открывает файл PascalABC.NET, в котором можно описать робота
-english.AboutRobocode=Open PascalABC.NET file, where you can write your own robot
+russian.RunRobocode=Запустить Robocode
+english.RunRobocode=Run Robocode
