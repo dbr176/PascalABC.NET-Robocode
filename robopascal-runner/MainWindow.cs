@@ -40,15 +40,13 @@ namespace robopascal_runner
             InitializeComponent();
 
             StartPosition = FormStartPosition.CenterScreen;
-
-            robopascalPathTextBox.Text = RobopascalDir;
             _folderBrowserDialog.SelectedPath = RobopascalDir;
         }
 
         private void compileButton_Click(object sender, EventArgs e)
         {
             logboxListBox.Items.Clear();
-            DirectoryInfo dir = new DirectoryInfo(robopascalPathTextBox.Text);
+            DirectoryInfo dir = new DirectoryInfo(RobopascalDir);
             var files = dir.GetFiles("*.pas", SearchOption.AllDirectories).Where(x => x.Name != "PABCSystem.pas").ToList();
 
             foreach (var file in files)
@@ -93,20 +91,12 @@ namespace robopascal_runner
                 FileName = batPath
             };
             
-            var process = Process.Start(psi);
+            Process.Start(psi);
         }
 
-        private void pathButton_Click(object sender, EventArgs e)
+        private void openPathButton_Click(object sender, EventArgs e)
         {
-            if (_folderBrowserDialog.ShowDialog() == DialogResult.OK)
-            {
-                robopascalPathTextBox.Text = _folderBrowserDialog.SelectedPath;
-            }
-        }
-
-        private void defaultPathButton_Click(object sender, EventArgs e)
-        {
-            robopascalPathTextBox.Text = RobopascalDir;
+            Process.Start("explorer.exe", RobopascalDir);
         }
     }
 }
