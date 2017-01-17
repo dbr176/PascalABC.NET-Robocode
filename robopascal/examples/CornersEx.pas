@@ -13,8 +13,11 @@ uses
 type
     Corners = class(Robot)
     private 
+        // Количество роботов в игре
         others: integer;
+        // Угол,в котором находится робот
         corner: integer;
+        // Указывает, нужно ли останавливаться, когда другой робот попадает в поле зрения
         stopWhenSeeRobot: boolean;
         rand : System.Random;
     
@@ -47,6 +50,7 @@ type
         
         procedure Run; override;
         begin
+            // Устанавливает цвета робота
             BodyColor   := Color.Red;
             GunColor    := Color.Black;
             RadarColor  := Color.Yellow;
@@ -56,18 +60,23 @@ type
             others      := Others;
             corner      := rand.Next(4) * 90;
             
+            // Приказать роботу двигаться в угол
             GoCorner();
             
+            // Скорость поворота орудия
             var gunIncrement: integer := 3;
             
+            // Вращаем орудие робота
             while true do 
             begin
                 for var i := 0 to 29 do
                     TurnGunLeft(gunIncrement);
+                // Меняем направление движения оружия                  
                 gunIncrement *= -1;        
             end;
         end;
         
+        // Вызывается, когда замечен другой робот
         procedure OnScannedRobot(e: ScannedRobotEvent); override;
         begin
             if stopWhenSeeRobot then

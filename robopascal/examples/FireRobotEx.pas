@@ -21,23 +21,28 @@ type
         
         procedure Run; override;
         begin
+            // Просто поворачиваем орудие вправо
             while true do 
-            begin
+            begin              
                 TurnGunRight(5);
             end;
         end;
         
         procedure OnScannedRobot(e: ScannedRobotEvent); override;
         begin
+            // Если друго робот близко и у него много энергии 
             if (e.Distance < 50) and (Energy > 50) then
+                // Делаем сильный выстрел
                 Fire(3)
             else
+                // Иначе делаем слабый выстрел
                 Fire(1);
             Scan();           
         end;
         
+        // Если в робота попали
         procedure OnHitByBullet(e: HitByBulletEvent); override;
-        begin
+        begin           
             TurnRight(Utils.NormalRelativeAngleDegrees(90 - (Heading - e.Heading)));
             
             Ahead(dist);

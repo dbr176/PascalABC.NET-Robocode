@@ -35,6 +35,7 @@ type
         
         procedure Run; override;
         begin
+            // Устанавливаем цвет робота
             BodyColor   := Color.Red;
             GunColor    := Color.Black;
             RadarColor  := Color.Yellow;
@@ -43,9 +44,12 @@ type
             
             while true do
             begin
+                // Приказываем роботу двигаться вперёд
                 SetAhead(40000);
                 movingForward := true;
+                // Попрачиваем вправо на угол 90 градусов
                 SetTurnRight(90);
+                // Ожидаем конец хода
                 WaitFor(new TurnCompleteCondition(self));
                 SetTurnLeft(180);
                 WaitFor(new TurnCompleteCondition(self));
@@ -54,18 +58,24 @@ type
             end;       
         end;
         
+        // Вызывается, когда робот врезается в стену
         procedure OnHitWall(e: HitWallEvent); override;
         begin
+            // Меняем направление
             ReverseDirection();
         end;
-              
+        
+        // Вызывается, когда замечен другой робот
         procedure OnScannedRobot(e: ScannedRobotEvent); override;
         begin
+            // Делаем выстрел
             Fire(1);
         end;
         
+        // Вызывается, когда робот врезается в другого робота
         procedure OnHitRobot(e: HitRobotEvent); override;
         begin
+            // Если врезался наш робот, то меняем направление
             if e.IsMyFault then reverseDirection();
         end;
     end;
