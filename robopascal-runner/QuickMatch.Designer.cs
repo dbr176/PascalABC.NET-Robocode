@@ -43,12 +43,12 @@
             this.hideNamesCheckBox = new System.Windows.Forms.CheckBox();
             this.coolRateLabel = new System.Windows.Forms.Label();
             this.optionsGroupBox = new System.Windows.Forms.GroupBox();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.refreshPictureBox = new System.Windows.Forms.PictureBox();
             this.coolRateTextBox = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.roundsNumericUpDown)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.inactiveNumericUpDown)).BeginInit();
             this.optionsGroupBox.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.refreshPictureBox)).BeginInit();
             this.SuspendLayout();
             // 
             // runButton
@@ -75,7 +75,7 @@
             this.roundsNumericUpDown.Location = new System.Drawing.Point(155, 14);
             this.roundsNumericUpDown.Name = "roundsNumericUpDown";
             this.roundsNumericUpDown.Size = new System.Drawing.Size(116, 20);
-            this.roundsNumericUpDown.TabIndex = 1;
+            this.roundsNumericUpDown.TabIndex = 0;
             this.roundsNumericUpDown.Value = new decimal(new int[] {
             10,
             0,
@@ -95,7 +95,7 @@
             this.resolutionComboBox.Location = new System.Drawing.Point(155, 43);
             this.resolutionComboBox.Name = "resolutionComboBox";
             this.resolutionComboBox.Size = new System.Drawing.Size(116, 21);
-            this.resolutionComboBox.TabIndex = 2;
+            this.resolutionComboBox.TabIndex = 1;
             // 
             // resoultionLabel
             // 
@@ -108,11 +108,12 @@
             // 
             // robotListCheckedListBox
             // 
+            this.robotListCheckedListBox.CheckOnClick = true;
             this.robotListCheckedListBox.FormattingEnabled = true;
             this.robotListCheckedListBox.Location = new System.Drawing.Point(9, 164);
             this.robotListCheckedListBox.Name = "robotListCheckedListBox";
             this.robotListCheckedListBox.Size = new System.Drawing.Size(262, 109);
-            this.robotListCheckedListBox.TabIndex = 4;
+            this.robotListCheckedListBox.TabIndex = 5;
             // 
             // robotListLabel
             // 
@@ -120,7 +121,7 @@
             this.robotListLabel.Location = new System.Drawing.Point(9, 145);
             this.robotListLabel.Name = "robotListLabel";
             this.robotListLabel.Size = new System.Drawing.Size(104, 13);
-            this.robotListLabel.TabIndex = 5;
+            this.robotListLabel.TabIndex = 0;
             this.robotListLabel.Text = "Список участников";
             // 
             // selectAllButton
@@ -131,6 +132,7 @@
             this.selectAllButton.TabIndex = 6;
             this.selectAllButton.Text = "Выбрать всех";
             this.selectAllButton.UseVisualStyleBackColor = true;
+            this.selectAllButton.Click += new System.EventHandler(this.checkListMassSelection_Click);
             // 
             // deselectButton
             // 
@@ -140,6 +142,7 @@
             this.deselectButton.TabIndex = 7;
             this.deselectButton.Text = "Сброс";
             this.deselectButton.UseVisualStyleBackColor = true;
+            this.deselectButton.Click += new System.EventHandler(this.checkListMassSelection_Click);
             // 
             // inactiveLabel
             // 
@@ -160,7 +163,7 @@
             0});
             this.inactiveNumericUpDown.Name = "inactiveNumericUpDown";
             this.inactiveNumericUpDown.Size = new System.Drawing.Size(116, 20);
-            this.inactiveNumericUpDown.TabIndex = 9;
+            this.inactiveNumericUpDown.TabIndex = 2;
             this.inactiveNumericUpDown.Value = new decimal(new int[] {
             450,
             0,
@@ -173,7 +176,7 @@
             this.hideNamesCheckBox.Location = new System.Drawing.Point(83, 308);
             this.hideNamesCheckBox.Name = "hideNamesCheckBox";
             this.hideNamesCheckBox.Size = new System.Drawing.Size(108, 17);
-            this.hideNamesCheckBox.TabIndex = 10;
+            this.hideNamesCheckBox.TabIndex = 4;
             this.hideNamesCheckBox.Text = "Спрятать имена";
             this.hideNamesCheckBox.UseVisualStyleBackColor = true;
             // 
@@ -188,7 +191,7 @@
             // 
             // optionsGroupBox
             // 
-            this.optionsGroupBox.Controls.Add(this.pictureBox1);
+            this.optionsGroupBox.Controls.Add(this.refreshPictureBox);
             this.optionsGroupBox.Controls.Add(this.coolRateTextBox);
             this.optionsGroupBox.Controls.Add(this.coolRateLabel);
             this.optionsGroupBox.Controls.Add(this.hideNamesCheckBox);
@@ -205,31 +208,31 @@
             this.optionsGroupBox.Location = new System.Drawing.Point(12, 12);
             this.optionsGroupBox.Name = "optionsGroupBox";
             this.optionsGroupBox.Size = new System.Drawing.Size(277, 331);
-            this.optionsGroupBox.TabIndex = 0;
+            this.optionsGroupBox.TabIndex = 20;
             this.optionsGroupBox.TabStop = false;
             this.optionsGroupBox.Text = "Настройки боя";
             // 
-            // pictureBox1
+            // refreshPictureBox
             // 
-            this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
-            this.pictureBox1.Location = new System.Drawing.Point(125, 280);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(22, 22);
-            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pictureBox1.TabIndex = 13;
-            this.pictureBox1.TabStop = false;
-            this.pictureBox1.Click += new System.EventHandler(this.pictureBox1_Click);
+            this.refreshPictureBox.Image = ((System.Drawing.Image)(resources.GetObject("refreshPictureBox.Image")));
+            this.refreshPictureBox.Location = new System.Drawing.Point(125, 280);
+            this.refreshPictureBox.Name = "refreshPictureBox";
+            this.refreshPictureBox.Size = new System.Drawing.Size(22, 22);
+            this.refreshPictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.refreshPictureBox.TabIndex = 13;
+            this.refreshPictureBox.TabStop = false;
+            this.refreshPictureBox.Click += new System.EventHandler(this.refreshPictureBox_Click);
             // 
             // coolRateTextBox
             // 
             this.coolRateTextBox.Location = new System.Drawing.Point(155, 98);
             this.coolRateTextBox.Name = "coolRateTextBox";
             this.coolRateTextBox.Size = new System.Drawing.Size(116, 20);
-            this.coolRateTextBox.TabIndex = 12;
+            this.coolRateTextBox.TabIndex = 3;
             this.coolRateTextBox.Text = "0.1";
             this.coolRateTextBox.KeyDown += new System.Windows.Forms.KeyEventHandler(this.coolRateTextBox_KeyDown);
             // 
-            // RunBattle
+            // QuickMatch
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -237,13 +240,13 @@
             this.Controls.Add(this.runButton);
             this.Controls.Add(this.optionsGroupBox);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
-            this.Name = "RunBattle";
+            this.Name = "QuickMatch";
             this.Text = "Быстрый бой";
             ((System.ComponentModel.ISupportInitialize)(this.roundsNumericUpDown)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.inactiveNumericUpDown)).EndInit();
             this.optionsGroupBox.ResumeLayout(false);
             this.optionsGroupBox.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.refreshPictureBox)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -264,6 +267,6 @@
         private System.Windows.Forms.Label coolRateLabel;
         private System.Windows.Forms.GroupBox optionsGroupBox;
         private System.Windows.Forms.TextBox coolRateTextBox;
-        private System.Windows.Forms.PictureBox pictureBox1;
+        private System.Windows.Forms.PictureBox refreshPictureBox;
     }
 }

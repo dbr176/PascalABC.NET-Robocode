@@ -23,21 +23,18 @@ namespace robopascal_runner
 
         private void Run()
         {
-            // Create the RobocodeEngine
             var engine = new RobocodeEngine(PascalPath.RobocodeDir);
 
-            // Add battle event handlers
+            // Event handlers
             engine.BattleCompleted += BattleCompleted;
             engine.BattleMessage += BattleMessage;
             engine.BattleError += BattleError;
 
-            // Show the Robocode battle view
+            // Setup
             engine.Visible = true;
-
             var numRounds = (int) roundsNumericUpDown.Value;
             var inactivityTime = (int) inactiveNumericUpDown.Value;
             var gunCoolingRate = double.Parse(coolRateTextBox.Text);
-            // run button wont be active if number is not double
             var hideNames = hideNamesCheckBox.Checked;
             var res = GetResolution();
             var battlefieldSize = new BattlefieldSpecification(res.Width, res.Height);
@@ -60,11 +57,12 @@ namespace robopascal_runner
 
                 //This operation is executed in the new AppDomain
                 robotNames.AddRange(loader.LoadClassTypes(robot.FullName));
+
                 AppDomain.Unload(childDomain);
             }
-            var namesConcat = robotNames.Aggregate((i, j) => i + "," + j);
-            var selectedRobots = engine.GetLocalRepository(namesConcat);
-
+            var names = robotNames.Aggregate((i, j) => i + "," + j);
+            Console.WriteLine(names);
+            var selectedRobots = engine.GetLocalRepository(names);
             var battleSpec = new BattleSpecification(numRounds, inactivityTime, gunCoolingRate, hideNames,
                 battlefieldSize, selectedRobots);
 
@@ -130,17 +128,14 @@ namespace robopascal_runner
 
         private void runButton_Click(object sender, EventArgs e)
         {
-            if (robotListCheckedListBox.SelectedItems.Count > 0)
+            if (robotListCheckedListBox.CheckedItems.Count > 0)
                 Run();
             else
                 MessageBox.Show("Необходимо выбрать хотя бы одного робота.", "Ошибка", MessageBoxButtons.OK,
                     MessageBoxIcon.Information);
         }
 
-        private void pictureBox1_Click(object sender, EventArgs e)
-        {
-            UpdateRobotList();
-        }
+        private void refreshPictureBox_Click(object sender, EventArgs e) => UpdateRobotList();
 
         private void UpdateRobotList()
         {
@@ -151,6 +146,19 @@ namespace robopascal_runner
 
             foreach (var file in files)
                 robotListCheckedListBox.Items.Add(file);
+        }
+
+        private void checkListMassSelection_Click(object sender, EventArgs e)
+        {
+            var b = (Button) sender;
+            bool select = b.Name.StartsWith("select");
+            for (int i = 0; i < robotListCheckedListBox.Items.Count; ++i)
+            {
+                robotListCheckedListBox.SetItemChecked(i, select);
+                robotListCheckedListBox.SetItemCheckState(i, CheckState.Checked);
+            }
+            robotListCheckedListBox.Refresh();
+            robotListCheckedListBox.Invalidate();
         }
     }
 }

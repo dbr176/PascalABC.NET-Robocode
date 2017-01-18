@@ -112,6 +112,7 @@
     <Compile Include="QuickMatch.Designer.cs">
       <DependentUpon>QuickMatch.cs</DependentUpon>
     </Compile>
+    <Compile Include="ReferenceLoader.cs" />
     <EmbeddedResource Include="About.resx">
       <DependentUpon>About.cs</DependentUpon>
     </EmbeddedResource>
