@@ -6,7 +6,6 @@ using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Windows.Forms;
-using Robocode;
 using Robocode.Control;
 using Robocode.Control.Events;
 
@@ -37,7 +36,8 @@ namespace robopascal_runner
 
             var numRounds = (int) roundsNumericUpDown.Value;
             var inactivityTime = (int) inactiveNumericUpDown.Value;
-            var gunCoolingRate = double.Parse(coolRateTextBox.Text); // run button wont be active if number is not double
+            var gunCoolingRate = double.Parse(coolRateTextBox.Text);
+            // run button wont be active if number is not double
             var hideNames = hideNamesCheckBox.Checked;
             var res = GetResolution();
             var battlefieldSize = new BattlefieldSpecification(res.Width, res.Height);
@@ -46,10 +46,21 @@ namespace robopascal_runner
             var robotNames = new List<string>();
             foreach (var robot in checkedRobots)
             {
-                var assembly = Assembly.LoadFile(robot.FullName);
-                foreach (var type in assembly.GetTypes())
-                    if (type.IsClass && type.IsSubclassOf(typeof(Robot)))
-                        robotNames.Add(type.FullName);
+                // reflection magic
+                var childDomain = AppDomain.CreateDomain(Guid.NewGuid().ToString(), null, new AppDomainSetup
+                {
+                    ApplicationBase = AppDomain.CurrentDomain.BaseDirectory
+                });
+                var handle = Activator.CreateInstance(childDomain,
+                    typeof(ReferenceLoader).Assembly.FullName,
+                    typeof(ReferenceLoader).FullName,
+                    false, BindingFlags.NonPublic | BindingFlags.Public | BindingFlags.Instance, null, null,
+                    CultureInfo.CurrentCulture, new object[0]);
+                var loader = (ReferenceLoader) handle.Unwrap();
+
+                //This operation is executed in the new AppDomain
+                robotNames.AddRange(loader.LoadClassTypes(robot.FullName));
+                AppDomain.Unload(childDomain);
             }
             var namesConcat = robotNames.Aggregate((i, j) => i + "," + j);
             var selectedRobots = engine.GetLocalRepository(namesConcat);
@@ -119,7 +130,11 @@ namespace robopascal_runner
 
         private void runButton_Click(object sender, EventArgs e)
         {
-            Run();
+            if (robotListCheckedListBox.SelectedItems.Count > 0)
+                Run();
+            else
+                MessageBox.Show("Необходимо выбрать хотя бы одного робота.", "Ошибка", MessageBoxButtons.OK,
+                    MessageBoxIcon.Information);
         }
 
         private void pictureBox1_Click(object sender, EventArgs e)
