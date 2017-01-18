@@ -239,7 +239,7 @@
             this.ClientSize = new System.Drawing.Size(301, 384);
             this.Controls.Add(this.runButton);
             this.Controls.Add(this.optionsGroupBox);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.Name = "QuickMatch";
             this.Text = "Быстрый бой";
             ((System.ComponentModel.ISupportInitialize)(this.roundsNumericUpDown)).EndInit();
