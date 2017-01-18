@@ -59,5 +59,14 @@ namespace robopascal_runner.Properties {
                 resourceCulture = value;
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to {0} v.{1}.
+        /// </summary>
+        internal static string AppVersion {
+            get {
+                return ResourceManager.GetString("AppVersion", resourceCulture);
+            }
+        }
     }
 }
