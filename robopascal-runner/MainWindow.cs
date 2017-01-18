@@ -4,6 +4,7 @@ using Microsoft.Win32;
 using System.IO;
 using System.Diagnostics;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace robopascal_runner
 {
@@ -49,7 +50,7 @@ namespace robopascal_runner
             DirectoryInfo dir = new DirectoryInfo(RobopascalDir);
             var files = dir.GetFiles("*.pas", SearchOption.AllDirectories).Where(x => x.Name != "PABCSystem.pas").ToList();
 
-            foreach (var file in files)
+            Parallel.ForEach(files, file =>
             {
                 var psi = new ProcessStartInfo
                 {
@@ -77,7 +78,7 @@ namespace robopascal_runner
                     var dllEnd = Path.Combine(PabcWork, RcRobocode, RcRobots, newName);
                     MoveWithReplace(dllStart, dllEnd);
                 }
-            }
+            });
         }
 
         private void runButton_Click(object sender, EventArgs e)
