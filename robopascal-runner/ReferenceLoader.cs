@@ -15,7 +15,7 @@ namespace robopascal_runner
 
         public string[] LoadClassTypes(string assemblyPath)
         {
-            var assembly = Assembly.ReflectionOnlyLoadFrom(assemblyPath);
+            var assembly = Assembly.LoadFrom(assemblyPath);
             var paths = assembly.GetTypes().Where(x => x.IsClass).Select(x => x.FullName).ToArray();
             return paths;
         }
