@@ -38,7 +38,6 @@
             this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.runSpecialButton = new System.Windows.Forms.Button();
-            this.exportButton = new System.Windows.Forms.Button();
             this.menuStrip.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -123,22 +122,11 @@
             this.runSpecialButton.UseVisualStyleBackColor = true;
             this.runSpecialButton.Click += new System.EventHandler(this.runSpecialButton_Click);
             // 
-            // exportButton
-            // 
-            this.exportButton.Enabled = false;
-            this.exportButton.Location = new System.Drawing.Point(12, 143);
-            this.exportButton.Name = "exportButton";
-            this.exportButton.Size = new System.Drawing.Size(194, 31);
-            this.exportButton.TabIndex = 11;
-            this.exportButton.Text = "Экспорт результата";
-            this.exportButton.UseVisualStyleBackColor = true;
-            // 
             // MainWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(218, 182);
-            this.Controls.Add(this.exportButton);
+            this.ClientSize = new System.Drawing.Size(218, 146);
             this.Controls.Add(this.runSpecialButton);
             this.Controls.Add(this.openPathButton);
             this.Controls.Add(this.menuStrip);
@@ -148,6 +136,7 @@
             this.MinimizeBox = false;
             this.Name = "MainWindow";
             this.Text = "PascalABC.NET Robocode";
+            this.Load += new System.EventHandler(this.MainWindow_Load);
             this.menuStrip.ResumeLayout(false);
             this.menuStrip.PerformLayout();
             this.ResumeLayout(false);
@@ -165,7 +154,6 @@
         private System.Windows.Forms.ToolStripMenuItem aboutToolStripMenuItem;
         private System.Windows.Forms.Button runSpecialButton;
         private System.Windows.Forms.ToolStripMenuItem runRobocodeToolStripMenuItem;
-        private System.Windows.Forms.Button exportButton;
     }
 }
 

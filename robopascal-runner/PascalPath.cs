@@ -1,9 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Diagnostics;
 using System.IO;
 using System.Linq;
-using System.Text;
-using Microsoft.Win32;
+using System.Threading.Tasks;
 
 namespace robopascal_runner
 {
@@ -17,21 +15,72 @@ namespace robopascal_runner
         public const string RobocodeFolder = "Robocode";
         public const string RobotsFolder = "robots";
         public const string RobocodeBatFile = "robocode.bat";
+        
+        private static string PabcPath
+            => Microsoft.Win32.Registry.GetValue(Registry, RegistryValue, null).ToString(); // TODO: исключение
+        public static string PabcWork => File.ReadAllText(Path.Combine(PabcPath, IniFileName));
+        public static string RobopascalDir => Path.Combine(PabcWork, RobocodeFolder, RobocodePascalFolder);
+        public static string RobocodeDir => Path.Combine(PabcWork, RobocodeFolder);
+        public static string RobotsDir => Path.Combine(PabcWork, RobocodeFolder, RobotsFolder);
 
         public static void MoveWithReplace(string sourceFileName, string destFileName)
         {
             if (File.Exists(destFileName))
-            {
                 File.Delete(destFileName);
-            }
             File.Move(sourceFileName, destFileName);
         }
 
-        public static string PabcPath => Microsoft.Win32.Registry.GetValue(Registry, RegistryValue, "NotFound").ToString(); // TODO: исключение
-        public static string PabcWork => File.ReadAllText(Path.Combine(PabcPath, IniFileName));
-        public static string RobopascalDir => Path.Combine(PabcWork, RobocodeFolder, RobocodePascalFolder);
-        public static string RobocodeDir => Path.Combine(PabcWork, RobocodeFolder);
+        public static void CompileRobots()
+        {
+            //logboxListBox.Items.Clear();
+            var dir = new DirectoryInfo(RobopascalDir);
+            var files =
+                dir.GetFiles("*.pas", SearchOption.AllDirectories).Where(x => x.Name != "PABCSystem.pas").ToList();
 
+            Parallel.ForEach(files, file =>
+            {
+                var psi = new ProcessStartInfo
+                {
+                    CreateNoWindow = true,
+                    UseShellExecute = false,
+                    RedirectStandardOutput = true,
+                    RedirectStandardError = true,
+                    FileName = Path.Combine(PabcPath, CompilerName),
+                    Arguments = file.FullName
+                };
 
+                var process = Process.Start(psi);
+                Debug.Assert(process != null, "process != null");
+                process.WaitForExit();
+
+                var output = process.StandardOutput.ReadToEnd().Trim();
+                var err = process.StandardError.ReadToEnd();
+
+                //logboxListBox.Items.Add(file.Name + " - " + output);
+
+                if (output == "OK")
+                {
+                    var newName = file.Name.Replace(".pas", ".dll");
+                    var dllStart = Path.Combine(file.DirectoryName, newName); // TODO : исключение
+                    var dllEnd = Path.Combine(PabcWork, RobocodeFolder, RobotsFolder,
+                        newName);
+                    MoveWithReplace(dllStart, dllEnd);
+                }
+            });
+        }
+
+        public static void RunBat()
+        {
+            var batPath = $"{Path.Combine(PabcWork, RobocodeFolder, RobocodeBatFile)}";
+            var psi = new ProcessStartInfo
+            {
+                WorkingDirectory = Path.Combine(PabcWork, RobocodeFolder),
+                CreateNoWindow = false,
+                UseShellExecute = false,
+                FileName = batPath
+            };
+
+            Process.Start(psi);
+        }
     }
 }
