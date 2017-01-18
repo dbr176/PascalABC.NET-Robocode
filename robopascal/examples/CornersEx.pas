@@ -1,5 +1,4 @@
 {$reference ../lib/robocode.dll}
-{$reference ../lib/robocode.control.dll}
 {$reference mscorlib.dll}
 {$reference System.Drawing.dll}
 
