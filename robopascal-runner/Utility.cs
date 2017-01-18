@@ -1,11 +1,13 @@
-﻿using System.Diagnostics;
+﻿using System;
+using System.ComponentModel;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 
 namespace robopascal_runner
 {
-    public static class PascalPath
+    public static class Utility
     {
         public const string Registry = @"HKEY_CURRENT_USER\SOFTWARE\PascalABC.NET";
         public const string RegistryValue = "Install Directory";
@@ -15,7 +17,7 @@ namespace robopascal_runner
         public const string RobocodeFolder = "Robocode";
         public const string RobotsFolder = "robots";
         public const string RobocodeBatFile = "robocode.bat";
-        
+
         private static string PabcPath
             => Microsoft.Win32.Registry.GetValue(Registry, RegistryValue, null).ToString(); // TODO: исключение
         public static string PabcWork => File.ReadAllText(Path.Combine(PabcPath, IniFileName));
@@ -30,9 +32,10 @@ namespace robopascal_runner
             File.Move(sourceFileName, destFileName);
         }
 
-        public static void CompileRobots()
+        public static void CompileRobots(BindingList<string> log)
         {
-            //logboxListBox.Items.Clear();
+            var date = DateTime.Now;
+            log.Add($"Новая компиляция: {date}");
             var dir = new DirectoryInfo(RobopascalDir);
             var files =
                 dir.GetFiles("*.pas", SearchOption.AllDirectories).Where(x => x.Name != "PABCSystem.pas").ToList();
@@ -56,8 +59,10 @@ namespace robopascal_runner
                 var output = process.StandardOutput.ReadToEnd().Trim();
                 var err = process.StandardError.ReadToEnd();
 
-                //logboxListBox.Items.Add(file.Name + " - " + output);
-
+                if (output != "OK")
+                    log.Add($"Файл {file.Name} - {output}");
+                else
+                    log.Add($"Файл {file.Name} - компиляция прошла успешно");
                 if (output == "OK")
                 {
                     var newName = file.Name.Replace(".pas", ".dll");
@@ -67,6 +72,7 @@ namespace robopascal_runner
                     MoveWithReplace(dllStart, dllEnd);
                 }
             });
+            log.Add("\n");
         }
 
         public static void RunBat()

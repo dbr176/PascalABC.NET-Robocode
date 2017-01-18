@@ -1,6 +1,6 @@
 ﻿namespace robopascal_runner
 {
-    partial class QuickMatch
+    partial class QuickMatchWindow
     {
         /// <summary>
         /// Required designer variable.
@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(QuickMatch));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(QuickMatchWindow));
             this.runButton = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.roundsNumericUpDown = new System.Windows.Forms.NumericUpDown();
@@ -242,6 +242,8 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.Name = "QuickMatch";
             this.Text = "Быстрый бой";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.QuickMatch_FormClosing);
+            this.Shown += new System.EventHandler(this.QuickMatch_Shown);
             ((System.ComponentModel.ISupportInitialize)(this.roundsNumericUpDown)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.inactiveNumericUpDown)).EndInit();
             this.optionsGroupBox.ResumeLayout(false);

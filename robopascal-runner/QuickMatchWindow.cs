@@ -11,14 +11,13 @@ using Robocode.Control.Events;
 
 namespace robopascal_runner
 {
-    public partial class QuickMatch : Form
+    public partial class QuickMatchWindow : Form
     {
-        public QuickMatch()
+        public QuickMatchWindow()
         {
             InitializeComponent();
 
             resolutionComboBox.SelectedIndex = 1;
-            UpdateRobotList();
 
             // Tooltips
             new ToolTip().SetToolTip(refreshPictureBox, "Перекомпилировать и обновить список роботов.");
@@ -29,7 +28,7 @@ namespace robopascal_runner
 
         private void Run()
         {
-            var engine = new RobocodeEngine(PascalPath.RobocodeDir);
+            var engine = new RobocodeEngine(Utility.RobocodeDir);
 
             // Event handlers
             engine.BattleCompleted += BattleCompleted;
@@ -147,9 +146,9 @@ namespace robopascal_runner
         {
             robotListCheckedListBox.Items.Clear();
 
-            PascalPath.CompileRobots();
+            Utility.CompileRobots((Owner as MainWindow).Log); // TODO: dirty
 
-            var dir = new DirectoryInfo(PascalPath.RobotsDir);
+            var dir = new DirectoryInfo(Utility.RobotsDir);
             var files = dir.GetFiles("*.dll", SearchOption.AllDirectories).ToList();
 
             foreach (var file in files)
@@ -159,13 +158,25 @@ namespace robopascal_runner
         private void checkListMassSelection_Click(object sender, EventArgs e)
         {
             var b = (Button) sender;
-            bool select = b.Name.StartsWith("select");
-            for (int i = 0; i < robotListCheckedListBox.Items.Count; ++i)
-            {
+            var select = b.Name.StartsWith("select");
+            for (var i = 0; i < robotListCheckedListBox.Items.Count; ++i)
                 robotListCheckedListBox.SetItemChecked(i, select);
-            }
             robotListCheckedListBox.Refresh();
             robotListCheckedListBox.Invalidate();
+        }
+
+        private void QuickMatch_Shown(object sender, EventArgs e)
+        {
+            UpdateRobotList();
+        }
+
+        private void QuickMatch_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            if (e.CloseReason == CloseReason.UserClosing)
+            {
+                Hide();
+                e.Cancel = true;
+            }
         }
     }
 }

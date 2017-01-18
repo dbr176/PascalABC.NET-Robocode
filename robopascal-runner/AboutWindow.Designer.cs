@@ -1,6 +1,6 @@
 ﻿namespace robopascal_runner
 {
-    partial class About
+    partial class AboutWindow
     {
         /// <summary>
         /// Required designer variable.

@@ -34,10 +34,10 @@
             this.robocodeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.runRobocodeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.compileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.optionsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.runSpecialButton = new System.Windows.Forms.Button();
+            this.logButton = new System.Windows.Forms.Button();
             this.menuStrip.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -67,7 +67,6 @@
             this.robocodeToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.runRobocodeToolStripMenuItem,
             this.compileToolStripMenuItem,
-            this.optionsToolStripMenuItem,
             this.exitToolStripMenuItem});
             this.robocodeToolStripMenuItem.Name = "robocodeToolStripMenuItem";
             this.robocodeToolStripMenuItem.Size = new System.Drawing.Size(73, 20);
@@ -89,14 +88,6 @@
             this.compileToolStripMenuItem.Text = "Скомпилировать роботов";
             this.compileToolStripMenuItem.Click += new System.EventHandler(this.compileToolStripMenuItem_Click);
             // 
-            // optionsToolStripMenuItem
-            // 
-            this.optionsToolStripMenuItem.Name = "optionsToolStripMenuItem";
-            this.optionsToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.O)));
-            this.optionsToolStripMenuItem.Size = new System.Drawing.Size(260, 22);
-            this.optionsToolStripMenuItem.Text = "Настройки";
-            this.optionsToolStripMenuItem.Click += new System.EventHandler(this.optionsToolStripMenuItem_Click);
-            // 
             // exitToolStripMenuItem
             // 
             this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
@@ -114,7 +105,7 @@
             // 
             // runSpecialButton
             // 
-            this.runSpecialButton.Location = new System.Drawing.Point(12, 85);
+            this.runSpecialButton.Location = new System.Drawing.Point(12, 143);
             this.runSpecialButton.Name = "runSpecialButton";
             this.runSpecialButton.Size = new System.Drawing.Size(194, 52);
             this.runSpecialButton.TabIndex = 10;
@@ -122,11 +113,22 @@
             this.runSpecialButton.UseVisualStyleBackColor = true;
             this.runSpecialButton.Click += new System.EventHandler(this.runSpecialButton_Click);
             // 
+            // logButton
+            // 
+            this.logButton.Location = new System.Drawing.Point(12, 85);
+            this.logButton.Name = "logButton";
+            this.logButton.Size = new System.Drawing.Size(194, 52);
+            this.logButton.TabIndex = 11;
+            this.logButton.Text = "Журнал компиляции";
+            this.logButton.UseVisualStyleBackColor = true;
+            this.logButton.Click += new System.EventHandler(this.logButton_Click);
+            // 
             // MainWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(218, 146);
+            this.ClientSize = new System.Drawing.Size(218, 206);
+            this.Controls.Add(this.logButton);
             this.Controls.Add(this.runSpecialButton);
             this.Controls.Add(this.openPathButton);
             this.Controls.Add(this.menuStrip);
@@ -136,7 +138,6 @@
             this.MinimizeBox = false;
             this.Name = "MainWindow";
             this.Text = "PascalABC.NET Robocode";
-            this.Load += new System.EventHandler(this.MainWindow_Load);
             this.menuStrip.ResumeLayout(false);
             this.menuStrip.PerformLayout();
             this.ResumeLayout(false);
@@ -149,11 +150,11 @@
         private System.Windows.Forms.MenuStrip menuStrip;
         private System.Windows.Forms.ToolStripMenuItem robocodeToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem compileToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem optionsToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem exitToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem aboutToolStripMenuItem;
         private System.Windows.Forms.Button runSpecialButton;
         private System.Windows.Forms.ToolStripMenuItem runRobocodeToolStripMenuItem;
+        private System.Windows.Forms.Button logButton;
     }
 }
 

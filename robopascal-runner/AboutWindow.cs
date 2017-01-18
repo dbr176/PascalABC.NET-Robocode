@@ -1,12 +1,13 @@
 ﻿using System;
+using System.Diagnostics;
 using System.Windows.Forms;
 using robopascal_runner.Properties;
 
 namespace robopascal_runner
 {
-    public partial class About : Form
+    public partial class AboutWindow : Form
     {
-        public About()
+        public AboutWindow()
         {
             InitializeComponent();
 
@@ -15,7 +16,7 @@ namespace robopascal_runner
 
         private void siteLinkLabel_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            System.Diagnostics.Process.Start(siteLinkLabel.Text);
+            Process.Start(siteLinkLabel.Text);
             Hide();
         }
 
