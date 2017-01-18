@@ -49,10 +49,10 @@ Source: "robopascal/*"; DestDir: "{app}/robopascal"; Flags: ignoreversion recurs
 
 [Icons]
 ; Меню Пуск
-Name: "{group}\Запустить Robocode"; Filename: "{app}/robopascal-runner.exe"; WorkingDir: "{app}"; Comment: "{cm:RunRobocode}"; IconFilename: "{app}/robocode.ico"
+Name: "{group}\Запустить Robocode"; Filename: "{app}/libs/robopascal-runner.exe"; WorkingDir: "{app}"; Comment: "{cm:RunRobocode}"; IconFilename: "{app}/robocode.ico"
 Name: "{group}\Удалить PascalABC.NET Robocode"; Filename: "{uninstallexe}"
 ; Рабочий стол
-Name: "{userdesktop}\Запустить Robocode"; Filename: "{app}/robopascal-runner.exe"; WorkingDir: "{app}"; Comment: "{cm:RunRobocode}"; IconFilename: "{app}/robocode.ico"
+Name: "{userdesktop}\Запустить Robocode"; Filename: "{app}/libs/robopascal-runner.exe"; WorkingDir: "{app}"; Comment: "{cm:RunRobocode}"; IconFilename: "{app}/robocode.ico"
 
 
 [Code]
