@@ -19,6 +19,12 @@ namespace robopascal_runner
 
             resolutionComboBox.SelectedIndex = 1;
             UpdateRobotList();
+
+            // Tooltips
+            new ToolTip().SetToolTip(refreshPictureBox, "Перекомпилировать и обновить список роботов.");
+            new ToolTip().SetToolTip(hideNamesCheckBox, "Не показывать имена танков во время боя.");
+            new ToolTip().SetToolTip(deselectButton, "Убрать выбор со всех участников.");
+            new ToolTip().SetToolTip(selectAllButton, "Установить выбор на всех участниках.");
         }
 
         private void Run()
@@ -141,6 +147,8 @@ namespace robopascal_runner
         {
             robotListCheckedListBox.Items.Clear();
 
+            PascalPath.CompileRobots();
+
             var dir = new DirectoryInfo(PascalPath.RobotsDir);
             var files = dir.GetFiles("*.dll", SearchOption.AllDirectories).ToList();
 
@@ -155,7 +163,6 @@ namespace robopascal_runner
             for (int i = 0; i < robotListCheckedListBox.Items.Count; ++i)
             {
                 robotListCheckedListBox.SetItemChecked(i, select);
-                robotListCheckedListBox.SetItemCheckState(i, CheckState.Checked);
             }
             robotListCheckedListBox.Refresh();
             robotListCheckedListBox.Invalidate();
