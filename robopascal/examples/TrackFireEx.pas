@@ -1,7 +1,7 @@
 {$reference ../lib/robocode.dll}
 {$reference System.Drawing.dll}
 
-library MyFirstRobot;
+library TrackFireEx;
 
 uses
     System.Drawing,
