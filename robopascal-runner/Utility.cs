@@ -59,10 +59,10 @@ namespace robopascal_runner
                 var output = process.StandardOutput.ReadToEnd().Trim();
                 var err = process.StandardError.ReadToEnd();
 
-                if (output != "OK")
-                    log.Add($"Файл {file.Name} - {output}");
-                else
-                    log.Add($"Файл {file.Name} - компиляция прошла успешно");
+                log.Add(output != "OK"
+                    ? $"Файл {file.Name} - {output}"
+                    : $"Файл {file.Name} - компиляция прошла успешно");
+
                 if (output == "OK")
                 {
                     var newName = file.Name.Replace(".pas", ".dll");
