@@ -24,9 +24,9 @@ Robocode включает в себя дистрибутив robocode'а и вс
 
 Необходимые компоненты:
   * [Inno Setup Unicode](http://www.jrsoftware.org/isdl.php).
-  * [Inno Script Studio](https://www.kymoto.org/products/inno-script-studio/downloads).
+  * [Inno Script Studio](https://www.kymoto.org/products/inno-script-studio/downloads) (для редактирования).
 
-Открыть .iss файл и скомпилировать его.
+Скомпилировать .iss файл.
 
 ## Запуск
 
