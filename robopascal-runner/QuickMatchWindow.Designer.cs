@@ -232,7 +232,7 @@
             this.coolRateTextBox.Text = "0.1";
             this.coolRateTextBox.KeyDown += new System.Windows.Forms.KeyEventHandler(this.coolRateTextBox_KeyDown);
             // 
-            // QuickMatch
+            // QuickMatchWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -240,7 +240,8 @@
             this.Controls.Add(this.runButton);
             this.Controls.Add(this.optionsGroupBox);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
-            this.Name = "QuickMatch";
+            this.Name = "QuickMatchWindow";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
             this.Text = "Быстрый бой";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.QuickMatch_FormClosing);
             this.Shown += new System.EventHandler(this.QuickMatch_Shown);

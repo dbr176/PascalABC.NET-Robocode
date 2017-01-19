@@ -72,6 +72,7 @@
             this.MinimizeBox = false;
             this.Name = "LogWindow";
             this.ShowIcon = false;
+            this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
             this.Text = "Журнал компиляции";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.LogWindow_FormClosing);
             this.Shown += new System.EventHandler(this.LogWindow_Shown);

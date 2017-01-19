@@ -168,6 +168,7 @@ namespace robopascal_runner
         private void QuickMatch_Shown(object sender, EventArgs e)
         {
             UpdateRobotList();
+            Location = new Point(Owner.Location.X + Owner.Width, Owner.Location.Y);
         }
 
         private void QuickMatch_FormClosing(object sender, FormClosingEventArgs e)
