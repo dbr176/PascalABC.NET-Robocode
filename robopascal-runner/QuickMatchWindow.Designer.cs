@@ -45,6 +45,7 @@
             this.optionsGroupBox = new System.Windows.Forms.GroupBox();
             this.refreshPictureBox = new System.Windows.Forms.PictureBox();
             this.coolRateTextBox = new System.Windows.Forms.TextBox();
+            this.terminateButton = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.roundsNumericUpDown)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.inactiveNumericUpDown)).BeginInit();
             this.optionsGroupBox.SuspendLayout();
@@ -232,11 +233,22 @@
             this.coolRateTextBox.Text = "0.1";
             this.coolRateTextBox.KeyDown += new System.Windows.Forms.KeyEventHandler(this.coolRateTextBox_KeyDown);
             // 
+            // terminateButton
+            // 
+            this.terminateButton.Location = new System.Drawing.Point(12, 378);
+            this.terminateButton.Name = "terminateButton";
+            this.terminateButton.Size = new System.Drawing.Size(277, 23);
+            this.terminateButton.TabIndex = 21;
+            this.terminateButton.Text = "Остановить выполнение";
+            this.terminateButton.UseVisualStyleBackColor = true;
+            this.terminateButton.Click += new System.EventHandler(this.terminateButton_Click);
+            // 
             // QuickMatchWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(301, 384);
+            this.ClientSize = new System.Drawing.Size(301, 409);
+            this.Controls.Add(this.terminateButton);
             this.Controls.Add(this.runButton);
             this.Controls.Add(this.optionsGroupBox);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
@@ -271,5 +283,6 @@
         private System.Windows.Forms.GroupBox optionsGroupBox;
         private System.Windows.Forms.TextBox coolRateTextBox;
         private System.Windows.Forms.PictureBox refreshPictureBox;
+        private System.Windows.Forms.Button terminateButton;
     }
 }

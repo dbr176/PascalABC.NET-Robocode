@@ -5,18 +5,20 @@ using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Reflection;
+using System.Threading;
 using System.Windows.Forms;
-using Robocode.Control;
-using Robocode.Control.Events;
 
 namespace robopascal_runner
 {
     public partial class QuickMatchWindow : Form
     {
+        private RobocodeEngineRunner _engine;
+        private readonly CultureInfo _culture = new CultureInfo("en-US");
+        private Thread thread;
+
         public QuickMatchWindow()
         {
             InitializeComponent();
-
             resolutionComboBox.SelectedIndex = 1;
 
             // Tooltips
@@ -26,133 +28,76 @@ namespace robopascal_runner
             new ToolTip().SetToolTip(selectAllButton, "Установить выбор на всех участниках.");
         }
 
-        private void Run()
+        private void QuickMatch_Shown(object sender, EventArgs e)
         {
-            var engine = new RobocodeEngine(Utility.RobocodeDir);
+            Location = new Point(Owner.Location.X + Owner.Width, Owner.Location.Y);
+            UpdateRobotList();
+        }
 
-            // Event handlers
-            engine.BattleCompleted += BattleCompleted;
-            engine.BattleMessage += BattleMessage;
-            engine.BattleError += BattleError;
-
-            // Setup
-            engine.Visible = true;
-            var numRounds = (int) roundsNumericUpDown.Value;
-            var inactivityTime = (int) inactiveNumericUpDown.Value;
-            var gunCoolingRate = double.Parse(coolRateTextBox.Text);
-            var hideNames = hideNamesCheckBox.Checked;
-            var res = GetResolution();
-            var battlefieldSize = new BattlefieldSpecification(res.Width, res.Height);
-
-            var checkedRobots = robotListCheckedListBox.CheckedItems.OfType<FileInfo>(); // or Cast, whatever
-            var robotNames = new List<string>();
-            foreach (var robot in checkedRobots)
+        private void QuickMatch_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            if (e.CloseReason == CloseReason.UserClosing)
             {
-                // reflection magic
-                var childDomain = AppDomain.CreateDomain(Guid.NewGuid().ToString(), null, new AppDomainSetup
-                {
-                    ApplicationBase = AppDomain.CurrentDomain.BaseDirectory
-                });
-                var handle = Activator.CreateInstance(childDomain,
-                    typeof(ReferenceLoader).Assembly.FullName,
-                    typeof(ReferenceLoader).FullName,
-                    false, BindingFlags.NonPublic | BindingFlags.Public | BindingFlags.Instance, null, null,
-                    CultureInfo.CurrentCulture, new object[0]);
-                var loader = (ReferenceLoader) handle.Unwrap();
-
-                //This operation is executed in the new AppDomain
-                robotNames.AddRange(loader.LoadClassTypes(robot.FullName));
-
-                AppDomain.Unload(childDomain);
+                Hide();
+                e.Cancel = true;
             }
-            var names = robotNames.Aggregate((i, j) => i + "," + j);
-            Console.WriteLine(names);
-            var selectedRobots = engine.GetLocalRepository(names);
-            var battleSpec = new BattleSpecification(numRounds, inactivityTime, gunCoolingRate, hideNames,
-                battlefieldSize, selectedRobots);
-
-            // Run battle
-            engine.RunBattle(battleSpec, true);
-            engine.Close();
-        }
-
-        // Called when the battle is completed successfully with battle results 
-        private static void BattleCompleted(BattleCompletedEvent e)
-        {
-            Console.WriteLine("-- Battle has completed --");
-
-            // Print out the sorted results with the robot names
-            Console.WriteLine("Battle results:");
-            foreach (var result in e.SortedResults)
-                Console.WriteLine($"  {result.TeamLeaderName}: {result.Score}");
-        }
-
-        // Called when the game sends out an information message during the battle 
-        private static void BattleMessage(BattleMessageEvent e)
-        {
-            Console.WriteLine("Msg> " + e.Message);
-        }
-
-        // Called when the game sends out an error message during the battle 
-        private static void BattleError(BattleErrorEvent e)
-        {
-            Console.WriteLine("Err> " + e.Error);
-        }
-
-        private Size GetResolution()
-        {
-            var size = resolutionComboBox.Text;
-            var split = size.Split('x');
-            var w = int.Parse(split[0]);
-            var h = int.Parse(split[1]);
-
-            return new Size(w, h);
+            else
+            {
+                terminateButton_Click(null, null);
+            }
         }
 
         private void coolRateTextBox_KeyDown(object sender, KeyEventArgs e)
         {
-            var isCorrectValue = IsDouble(coolRateTextBox.Text);
+            var isCorrectValue = Utility.IsDouble(coolRateTextBox.Text);
             runButton.Enabled = isCorrectValue;
 
             coolRateTextBox.BackColor = !isCorrectValue ? Color.Red : SystemColors.Window;
         }
 
-        private bool IsDouble(string value)
-        {
-            var culture = new CultureInfo("en-US");
-            try
-            {
-                var d = double.Parse(value, culture);
-                return true;
-            }
-            catch (FormatException)
-            {
-                return false;
-            }
-        }
-
         private void runButton_Click(object sender, EventArgs e)
         {
             if (robotListCheckedListBox.CheckedItems.Count > 0)
-                Run();
+            {
+                _engine = new RobocodeEngineRunner();
+
+                var numRounds = (int)roundsNumericUpDown.Value;
+                var inactivityTime = (int)inactiveNumericUpDown.Value;
+                var gunCoolingRate = double.Parse(coolRateTextBox.Text, _culture);
+                var hideNames = hideNamesCheckBox.Checked;
+                var res = Utility.GetResolution(resolutionComboBox.Text);
+
+                var checkedRobots = robotListCheckedListBox.CheckedItems.OfType<FileInfo>(); // or Cast, whatever
+                var robotNames = new List<string>();
+                foreach (var robot in checkedRobots)
+                {
+                    // reflection magic
+                    var childDomain = AppDomain.CreateDomain(Guid.NewGuid().ToString(), null, new AppDomainSetup
+                    {
+                        ApplicationBase = AppDomain.CurrentDomain.BaseDirectory
+                    });
+                    var handle = Activator.CreateInstance(childDomain,
+                        typeof(ReferenceLoader).Assembly.FullName,
+                        typeof(ReferenceLoader).FullName,
+                        false, BindingFlags.NonPublic | BindingFlags.Public | BindingFlags.Instance, null, null,
+                        CultureInfo.CurrentCulture, new object[0]);
+                    var loader = (ReferenceLoader)handle.Unwrap();
+
+                    //This operation is executed in the new AppDomain
+                    robotNames.AddRange(loader.LoadClassTypes(robot.FullName));
+
+                    AppDomain.Unload(childDomain);
+                }
+                var names = robotNames.Aggregate((i, j) => i + "," + j);
+
+                thread = new Thread(() =>_engine.Run(numRounds, inactivityTime, gunCoolingRate, hideNames, res, names));
+                thread.Start();
+            }
             else
+            {
                 MessageBox.Show("Необходимо выбрать хотя бы одного робота.", "Ошибка", MessageBoxButtons.OK,
                     MessageBoxIcon.Information);
-        }
-
-        private void refreshPictureBox_Click(object sender, EventArgs e) => UpdateRobotList();
-
-        private void UpdateRobotList()
-        {
-            robotListCheckedListBox.Items.Clear();
-
-            Utility.CompileRobots((Owner as MainWindow).Log); // TODO: dirty
-
-            var dir = new DirectoryInfo(Utility.RobotsDir);
-            var files = dir.GetFiles("*.dll", SearchOption.AllDirectories).ToList();
-
-            foreach (var file in files)
-                robotListCheckedListBox.Items.Add(file);
+            }
         }
 
         private void checkListMassSelection_Click(object sender, EventArgs e)
@@ -165,19 +110,25 @@ namespace robopascal_runner
             robotListCheckedListBox.Invalidate();
         }
 
-        private void QuickMatch_Shown(object sender, EventArgs e)
+        private void refreshPictureBox_Click(object sender, EventArgs e) => UpdateRobotList();
+
+        private void terminateButton_Click(object sender, EventArgs e)
         {
-            UpdateRobotList();
-            Location = new Point(Owner.Location.X + Owner.Width, Owner.Location.Y);
+            _engine?.Abort();
+            thread.Join(new TimeSpan(0, 0, 0, 1));
         }
 
-        private void QuickMatch_FormClosing(object sender, FormClosingEventArgs e)
+    private void UpdateRobotList()
         {
-            if (e.CloseReason == CloseReason.UserClosing)
-            {
-                Hide();
-                e.Cancel = true;
-            }
+            robotListCheckedListBox.Items.Clear();
+            Utility.CompileRobots((Owner as MainWindow).Log); // TODO: dirty
+
+            var dir = new DirectoryInfo(Utility.RobotsDir);
+            var files = dir.GetFiles("*.dll", SearchOption.AllDirectories).ToList();
+
+            foreach (var file in files)
+                robotListCheckedListBox.Items.Add(file);
         }
     }
 }
+

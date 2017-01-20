@@ -13,8 +13,8 @@ namespace robopascal_runner
 
         private void LogWindow_Shown(object sender, EventArgs e)
         {
+            Location = new Point(Owner.Location.X - Width, Owner.Location.Y);
             logListBox.DataSource = (Owner as MainWindow).Log;
-            Location = new Point(Owner.Location.X - Owner.Width, Owner.Location.Y);
         }
 
         private void LogWindow_FormClosing(object sender, FormClosingEventArgs e)
