@@ -1,6 +1,8 @@
 ﻿using System;
 using System.ComponentModel;
 using System.Diagnostics;
+using System.Drawing;
+using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
@@ -87,6 +89,30 @@ namespace robopascal_runner
             };
 
             Process.Start(psi);
+        }
+
+        public static bool IsDouble(string value)
+        {
+            var culture = new CultureInfo("en-US");
+            try
+            {
+                var d = Double.Parse(value, culture);
+                return true;
+            }
+            catch (FormatException)
+            {
+                return false;
+            }
+        }
+
+        public static Size GetResolution(string resString)
+        {
+            var size = resString;
+            var split = size.Split('x');
+            var w = Int32.Parse(split[0]);
+            var h = Int32.Parse(split[1]);
+
+            return new Size(w, h);
         }
     }
 }
