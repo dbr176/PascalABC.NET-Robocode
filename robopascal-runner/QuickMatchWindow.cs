@@ -13,8 +13,8 @@ namespace robopascal_runner
     public partial class QuickMatchWindow : Form
     {
         private RobocodeEngineRunner _engine;
+        private Thread _th;
         private readonly CultureInfo _culture = new CultureInfo("en-US");
-        private Thread thread;
 
         public QuickMatchWindow()
         {
@@ -40,10 +40,6 @@ namespace robopascal_runner
             {
                 Hide();
                 e.Cancel = true;
-            }
-            else
-            {
-                terminateButton_Click(null, null);
             }
         }
 
@@ -90,8 +86,11 @@ namespace robopascal_runner
                 }
                 var names = robotNames.Aggregate((i, j) => i + "," + j);
 
-                thread = new Thread(() =>_engine.Run(numRounds, inactivityTime, gunCoolingRate, hideNames, res, names));
-                thread.Start();
+                _th = new Thread(() => _engine.Run(numRounds, inactivityTime, gunCoolingRate, hideNames, res, names))
+                {
+                    IsBackground = true
+                };
+                _th.Start();
             }
             else
             {
@@ -115,7 +114,7 @@ namespace robopascal_runner
         private void terminateButton_Click(object sender, EventArgs e)
         {
             _engine?.Abort();
-            thread.Join(new TimeSpan(0, 0, 0, 1));
+            _th?.Join();
         }
 
     private void UpdateRobotList()
