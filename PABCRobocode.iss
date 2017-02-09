@@ -3,7 +3,7 @@
 ; 2016
 
 #define MyAppName             "PascalABC.NET Robocode"
-#define MyAppVersion          "0.2"
+#define MyAppVersion          "0.3"
 #define MyAppPublisher        "MMCS"
 #define MyAppURL              "http://pascalabc.net/"
 
