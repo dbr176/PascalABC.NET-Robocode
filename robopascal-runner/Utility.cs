@@ -96,7 +96,7 @@ namespace robopascal_runner
             var culture = new CultureInfo("en-US");
             try
             {
-                var d = Double.Parse(value, culture);
+                var d = double.Parse(value, culture);
                 return true;
             }
             catch (FormatException)
@@ -109,8 +109,8 @@ namespace robopascal_runner
         {
             var size = resString;
             var split = size.Split('x');
-            var w = Int32.Parse(split[0]);
-            var h = Int32.Parse(split[1]);
+            var w = int.Parse(split[0]);
+            var h = int.Parse(split[1]);
 
             return new Size(w, h);
         }

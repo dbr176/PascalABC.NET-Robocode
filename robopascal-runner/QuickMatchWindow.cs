@@ -1,10 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Drawing;
 using System.Globalization;
 using System.IO;
 using System.Linq;
-using System.Reflection;
 using System.Threading;
 using System.Windows.Forms;
 
@@ -12,9 +10,9 @@ namespace robopascal_runner
 {
     public partial class QuickMatchWindow : Form
     {
-        private RobocodeEngineRunner _engine;
-        private Thread _th;
         private readonly CultureInfo _culture = new CultureInfo("en-US");
+        private readonly RobocodeEngineRunner _engine = new RobocodeEngineRunner();
+        private Thread _th;
 
         public QuickMatchWindow()
         {
@@ -55,38 +53,20 @@ namespace robopascal_runner
         {
             if (robotListCheckedListBox.CheckedItems.Count > 0)
             {
-                _engine = new RobocodeEngineRunner();
-
-                var numRounds = (int)roundsNumericUpDown.Value;
-                var inactivityTime = (int)inactiveNumericUpDown.Value;
-                var gunCoolingRate = double.Parse(coolRateTextBox.Text, _culture);
-                var hideNames = hideNamesCheckBox.Checked;
-                var res = Utility.GetResolution(resolutionComboBox.Text);
-
                 var checkedRobots = robotListCheckedListBox.CheckedItems.OfType<FileInfo>(); // or Cast, whatever
-                var robotNames = new List<string>();
-                foreach (var robot in checkedRobots)
+                var names = RobocodeEngineRunner.CompileAssembly(checkedRobots);
+
+                var engineParams = new RobocodeEngineParams
                 {
-                    // reflection magic
-                    var childDomain = AppDomain.CreateDomain(Guid.NewGuid().ToString(), null, new AppDomainSetup
-                    {
-                        ApplicationBase = AppDomain.CurrentDomain.BaseDirectory
-                    });
-                    var handle = Activator.CreateInstance(childDomain,
-                        typeof(ReferenceLoader).Assembly.FullName,
-                        typeof(ReferenceLoader).FullName,
-                        false, BindingFlags.NonPublic | BindingFlags.Public | BindingFlags.Instance, null, null,
-                        CultureInfo.CurrentCulture, new object[0]);
-                    var loader = (ReferenceLoader)handle.Unwrap();
+                    GunCoolingRate = double.Parse(coolRateTextBox.Text, _culture),
+                    NumRounds = (int) roundsNumericUpDown.Value,
+                    InactivityTime = (int) inactiveNumericUpDown.Value,
+                    HideNames = hideNamesCheckBox.Checked,
+                    Resolution = Utility.GetResolution(resolutionComboBox.Text),
+                    RobotNames = names
+                };
 
-                    //This operation is executed in the new AppDomain
-                    robotNames.AddRange(loader.LoadClassTypes(robot.FullName));
-
-                    AppDomain.Unload(childDomain);
-                }
-                var names = robotNames.Aggregate((i, j) => i + "," + j);
-
-                _th = new Thread(() => _engine.Run(numRounds, inactivityTime, gunCoolingRate, hideNames, res, names))
+                _th = new Thread(() => _engine.Run(engineParams))
                 {
                     IsBackground = true
                 };
@@ -114,10 +94,11 @@ namespace robopascal_runner
         private void terminateButton_Click(object sender, EventArgs e)
         {
             _engine?.Abort();
+            // _engine?.Close();
             _th?.Join();
         }
 
-    private void UpdateRobotList()
+        private void UpdateRobotList()
         {
             robotListCheckedListBox.Items.Clear();
             Utility.CompileRobots((Owner as MainWindow).Log); // TODO: dirty
@@ -130,4 +111,3 @@ namespace robopascal_runner
         }
     }
 }
-

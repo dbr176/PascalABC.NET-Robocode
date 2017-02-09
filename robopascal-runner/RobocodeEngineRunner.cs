@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Drawing;
 using System.Globalization;
 using System.IO;
 using System.Linq;
@@ -13,10 +12,9 @@ namespace robopascal_runner
     public class RobocodeEngineRunner
     {
         private RobocodeEngine _engine;
-        
 
-        public void Run(int numRounds, int inactivityTime, double gunCoolingRate, bool hideNames, Size res,
-            string names)
+
+        public void Run(RobocodeEngineParams engineParams)
         {
             _engine = new RobocodeEngine(Utility.RobocodeDir);
 
@@ -27,19 +25,55 @@ namespace robopascal_runner
 
             // Setup
             _engine.Visible = true;
-            var battlefieldSize = new BattlefieldSpecification(res.Width, res.Height);
+            var battlefieldSize = new BattlefieldSpecification(engineParams.Resolution.Width,
+                engineParams.Resolution.Height);
 
-            Console.WriteLine(names);
-            var selectedRobots = _engine.GetLocalRepository(names);
-            var battleSpec = new BattleSpecification(numRounds, inactivityTime, gunCoolingRate, hideNames,
+            var selectedRobots = _engine.GetLocalRepository(engineParams.RobotNames);
+            var battleSpec = new BattleSpecification(engineParams.NumRounds, engineParams.InactivityTime,
+                engineParams.GunCoolingRate, engineParams.HideNames,
                 battlefieldSize, selectedRobots);
 
             // Run battle
             _engine.RunBattle(battleSpec, true);
+        }
+
+        public void Abort()
+        {
+            _engine.AbortCurrentBattle();
+        }
+
+        // do not call close unless you close application
+        // Close dispose evrything and wont re-load libs
+        // causing blank battle screen
+        public void Close()
+        {
             _engine.Close();
         }
 
-        public void Abort() => _engine.AbortCurrentBattle();
+        public static string CompileAssembly(IEnumerable<FileInfo> checkedRobots)
+        {
+            var robotNames = new List<string>();
+            foreach (var robot in checkedRobots)
+            {
+                // reflection magic
+                var childDomain = AppDomain.CreateDomain(Guid.NewGuid().ToString(), null, new AppDomainSetup
+                {
+                    ApplicationBase = AppDomain.CurrentDomain.BaseDirectory
+                });
+                var handle = Activator.CreateInstance(childDomain,
+                    typeof(ReferenceLoader).Assembly.FullName,
+                    typeof(ReferenceLoader).FullName,
+                    false, BindingFlags.NonPublic | BindingFlags.Public | BindingFlags.Instance, null, null,
+                    CultureInfo.CurrentCulture, new object[0]);
+                var loader = (ReferenceLoader) handle.Unwrap();
+
+                //This operation is executed in the new AppDomain
+                robotNames.AddRange(loader.LoadClassTypes(robot.FullName));
+
+                AppDomain.Unload(childDomain);
+            }
+            return robotNames.Aggregate((i, j) => i + "," + j);
+        }
 
         // Called when the battle is completed successfully with battle results 
         private static void BattleCompleted(BattleCompletedEvent e)

@@ -109,6 +109,7 @@
     <Compile Include="MainWindow.Designer.cs">
       <DependentUpon>MainWindow.cs</DependentUpon>
     </Compile>
+    <Compile Include="RobocodeEngineParams.cs" />
     <Compile Include="RobocodeEngineRunner.cs" />
     <Compile Include="Utility.cs" />
     <Compile Include="Program.cs" />
